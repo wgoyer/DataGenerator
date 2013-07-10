@@ -14,7 +14,14 @@ exports.getValues = function(req, res, next){
 
 exports.createUser = function(req, res){
 	validateCreateFields(req, function(validations){
-		if(validations.length>0){
+		var validationPass = true;
+		for(i=0;i<validations.length;i++){
+			console.log(validations[i]);
+			if (validations[i] === false){
+				validationPass = false;
+			}
+		}
+		if(validationPass === false){
 			console.log(validations);
 			res.render('users', {validationErrors:validations});
 		}
@@ -37,7 +44,7 @@ exports.createUser = function(req, res){
 					body: myBody
 				}, function(error,response,body){
 					console.log(body);
-					res.render('users');
+					res.render('users', {validationErrors:validations});
 				});
 			});
 		}
@@ -46,38 +53,28 @@ exports.createUser = function(req, res){
 
 
 exports.createManyUser = function(req, res){
-	var dumbArray = [true,true,true,true,true]
 	validateCreateFields(req, function(validations){
-		if(validations.length>0){
-			console.log(validations);
-			res.render('users',{validationErrors:validations});
+		var validationPass = true;
+		for(i=0;i<validations.length;i++){
+			console.log(validations[i]);
+			if (validations[i] === false){
+				validationPass = false;
+			}
+		}
+		if(validationPass === false){
+			res.render('users', {validationErrors:validations});
 		}
 		else{
-			getSecurityToken(function(token){
-				for(i=0;i<req.body.cCount;i++){
-					var userURI = baseURI+"/user/create?key="+token;
-					var body = JSON.stringify({
-						"User":{
-							"EmailAddress":req.body.cEmail+i,
-							"FirstName":req.body.cFirst+i,
-							"LastName":req.body.cLast+i,
-							"DisplayName":req.body.cDisplay+i,
-							"UserName": req.body.cUser+i
-						}
-					});
-					request({
-						method: 'post',
-						uri: userURI,
-						body: myBody
-					}, function(error,response,body){
+			for(i=0;i<req.body.cCount;i++){
+				getSecurityToken(function(token){
+					createUser(req, token, i, function(body){
 						console.log(body);
-						res.render('users');
 					});
-				};
-			});
-		}
+				});
+			};
+		};
+		res.render('users', {validationErrors:validations});
 	});
-	res.render('users', {validationErrors:dumbArray});
 }
 
 
@@ -115,6 +112,30 @@ exports.buildQuery = function(req, res, next){
 	getQueryString(req, values, helper);
 	next();
 };
+
+createUser = function(req, token, count, callback){
+	if(typeof(count) != "number"){
+		count="";
+	}
+		var userURI = baseURI+"/user/create?key="+token;
+		var myBody = JSON.stringify({
+			"User":{
+				"EmailAddress":req.body.cEmail,
+				"FirstName":req.body.cFirst+count,
+				"LastName":req.body.cLast+count,
+				"DisplayName":req.body.cDisplay+count,
+				"UserName": count+req.body.cUser,
+			}
+		});
+		console.log(userURI);
+		request({
+			method: 'post',
+			uri: userURI,
+			body: myBody
+		}, function(error,response,body){
+			callback(body);
+		});
+}
 
 validateCreateFields =  function(req, callback){
 	var emailReg = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;

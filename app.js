@@ -12,12 +12,14 @@ app.configure(function(){
 	app.use(express.static('public'));
 });
 
+app.get('/', rallyrequest.getValues, rallyrequest.renderSomeShit);
+app.get('/users', rallyrequest.users);
+
 app.post('/createUser', rallyrequest.createUser);
 app.post('/defect', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.defect);
 app.post('/story', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.userStory);
-app.get('/', rallyrequest.getValues, rallyrequest.renderSomeShit);
+app.post('/createManyUser', rallyrequest.createManyUser);
 
-app.get('/users', rallyrequest.users);
-//app.post('/createManyUser', rallyrequest.createManyUser);
+
 app.listen(8080);
 console.log("Started on 8080");
