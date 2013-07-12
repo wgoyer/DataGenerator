@@ -1,7 +1,6 @@
 var request = require('request');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
-
 exports.getValues = function(req, res, next){
 	getPriority(req, function(){
 		getSeverity(req, function(){
@@ -11,83 +10,34 @@ exports.getValues = function(req, res, next){
 		});
 	});
 };
-
 exports.createUser = function(req, res){
-	validateCreateFields(req, function(validations){
-		var validationPass = true;
-		for(i=0;i<validations.length;i++){
-			console.log(validations[i]);
-			if (validations[i] === false){
-				validationPass = false;
-			}
-		}
-		if(validationPass === false){
-			console.log(validations);
-			res.render('users', {validationErrors:validations});
-		}
-		else{
-			getSecurityToken(function(token){
-				var userURI = baseURI+"/user/create?key="+token;
-				var myBody = JSON.stringify({
-					"User":{
-						"EmailAddress":req.body.cEmail,
-						"FirstName":req.body.cFirst,
-						"LastName":req.body.cLast,
-						"DisplayName": req.body.cDisplay,
-						"UserName": req.body.cUser
-					}
-				});
-				console.log(userURI);
-				request({
-					method: 'post',
-					uri: userURI,
-					body: myBody
-				}, function(error,response,body){
-					console.log(body);
-					res.render('users', {validationErrors:validations});
-				});
+	validateCreateFields(req, res, function(){
+		getSecurityToken(function(token){
+			createUser(req, token, null, function(body){
+				console.log(body);
+				res.render('users', {validationErrors:true});
 			});
-		}
+		});
 	});
-}
-
-
+};
 exports.createManyUser = function(req, res){
-	validateCreateFields(req, function(validations){
-		var validationPass = true;
-		for(i=0;i<validations.length;i++){
-			console.log(validations[i]);
-			if (validations[i] === false){
-				validationPass = false;
-			}
-		}
-		if(validationPass === false){
-			res.render('users', {validationErrors:validations});
-		}
-		else{
-			for(i=0;i<req.body.cCount;i++){
-				getSecurityToken(function(token){
-					createUser(req, token, i, function(body){
-						console.log(body);
-					});
-				});
-			};
-		};
-		res.render('users', {validationErrors:validations});
+	validateCreateFields(req, res, function(){
+		getSecurityToken(function(token){
+			createUser(req, token, i, function(body){
+				console.log(body);
+				res.render('users', {validationErrors:true});
+			});
+		});
 	});
-}
-
-
+};
 exports.users = function(req,res){
 	var dumbArray = [true,true,true,true,true]
 	res.render('users', {validationErrors:dumbArray});
 };
-
 exports.renderSomeShit = function(req, res){
 	var results = "nothing";
 	res.render('index', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});	
 };
-
 exports.userStory = function(req, res){
 	var URI = baseURI + req.queryString;
 	request(URI, function(error, response, body){
@@ -96,7 +46,6 @@ exports.userStory = function(req, res){
 		res.render('index', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
 	}).auth(rallyAuth[0], rallyAuth[1], false);
 };
-
 exports.defect = function(req, res){
 	var URI = baseURI + req.queryString;
 	request(URI, function(error, response, body){
@@ -105,14 +54,12 @@ exports.defect = function(req, res){
 		res.render('index',{output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
 	}).auth(rallyAuth[0], rallyAuth[1], false);
 };
-
 exports.buildQuery = function(req, res, next){
 	var values = extractValues(req);
 	var helper = checkFields(values);
 	getQueryString(req, values, helper);
 	next();
 };
-
 createUser = function(req, token, count, callback){
 	if(typeof(count) != "number"){
 		count="";
@@ -136,11 +83,11 @@ createUser = function(req, token, count, callback){
 			callback(body);
 		});
 }
-
-validateCreateFields =  function(req, callback){
-	var emailReg = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-	var validations = [true,true,true,true,true];	
-	if(!emailReg.test(req.body.cEmail)){
+validateCreateFields =  function(req, res, callback){
+	var emailRegex = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+	var validations = [true,true,true,true,true];
+	var validationPass = true;
+	if(!emailRegex.test(req.body.cEmail)){
 		validations[0]=false;
 	}
 	if(req.body.cFirst === ''){
@@ -155,9 +102,17 @@ validateCreateFields =  function(req, callback){
 	if(req.body.cDisplay === ''){
 		validations[4]=false;
 	}
+		for(i=0;i<validations.length;i++){
+			if (validations[i] === false){
+				validationPass = false;
+			}
+		}
+		if(validationPass === false){
+			console.log(validations);
+			res.render('users', {validationErrors:validations});
+		}
 	callback(validations);
 }
-
 getPriority = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-12513/AllowedValues";
 	genericApiCall(req, URI, function(apiResults){
@@ -167,7 +122,6 @@ getPriority = function(req, callback){
 		}	
 	});
 };
-
 getSeverity = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-12509/AllowedValues";
 	genericApiCall(req, URI, function(apiResults){
@@ -177,7 +131,6 @@ getSeverity = function(req, callback){
 		}
 	});
 };
-
 getStoryState = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-27506/AllowedValues";
 	genericApiCall(req, URI, function(apiResults){
@@ -187,7 +140,6 @@ getStoryState = function(req, callback){
 		}
 	});
 };
-
 genericApiCall = function(req, URI, callback){
 	var apiResults = [];
 	request(URI, function(error,response,body){
@@ -198,8 +150,7 @@ genericApiCall = function(req, URI, callback){
 		}
 		callback(apiResults);
 	}).auth(rallyAuth[0], rallyAuth[1], false);
-}
-
+};
 extractValues = function(req){
 	var values = [];
 	var helper = [];
@@ -209,8 +160,7 @@ extractValues = function(req){
 		values = [req.body.sName, req.body.sState];
 	}
 	return values;
-}
-
+};
 checkFields = function(values){
 	var helper = [];
 	for(i=0;values.length>i;i++){
@@ -219,8 +169,7 @@ checkFields = function(values){
 			} else helper.push(0);
 	};
 	return helper;
-}
-
+};
 getSecurityToken = function(callback){
 	var secURI = baseURI+"/security/authorize"
 	request(secURI, function(error,response,body){
@@ -228,8 +177,7 @@ getSecurityToken = function(callback){
 		var token = parsedjson.OperationResult.SecurityToken;
 		callback(token);
 	}).auth(rallyAuth[0], rallyAuth[1], false);
-}
-
+};
 getQueryString = function(req, values, helper){
 	if(req.url === '/defect'){
 		switch(helper.toString())
