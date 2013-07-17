@@ -23,16 +23,18 @@ exports.createUser = function (req, res){
 };
 exports.createManyUser = function(req, res){
 	validateCreateFields(req, res, function(){
+		var q;
 		var count = req.body.cCount;
 		for(q=0;q<count;q++){
-			console.log(q);
-			getSecurityToken(function(token){
-				console.log(token, q, count);
-				//createUser(req, token, i, function(body){
-					//console.log(body);
-					//res.render('users', {validationErrors:true});
-				//});
-			});
+			(function(q) {
+				getSecurityToken(function(token){
+					console.log(token, q);
+					createUser(req, token, q, function(body){
+						console.log(body);
+						//res.render('users', {validationErrors:true});
+					});
+				});
+			})(q);
 		};
 	});
 };
