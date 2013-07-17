@@ -10,8 +10,9 @@ exports.getValues = function(req, res, next){
 		});
 	});
 };
-exports.createUser = function(req, res){
-	validateCreateFields(req, res, function(){
+exports.createUser = function (req, res){
+	validateCreateFields (req, res, function(validations){
+		console.log(validations);
 		getSecurityToken(function(token){
 			createUser(req, token, null, function(body){
 				console.log(body);
@@ -22,17 +23,21 @@ exports.createUser = function(req, res){
 };
 exports.createManyUser = function(req, res){
 	validateCreateFields(req, res, function(){
-		getSecurityToken(function(token){
-			createUser(req, token, i, function(body){
-				console.log(body);
-				res.render('users', {validationErrors:true});
+		var count = req.body.cCount;
+		for(q=0;q<count;q++){
+			console.log(q);
+			getSecurityToken(function(token){
+				console.log(token, q, count);
+				//createUser(req, token, i, function(body){
+					//console.log(body);
+					//res.render('users', {validationErrors:true});
+				//});
 			});
-		});
+		};
 	});
 };
 exports.users = function(req,res){
-	var dumbArray = [true,true,true,true,true]
-	res.render('users', {validationErrors:dumbArray});
+	res.render('users', {validationErrors:true});
 };
 exports.renderSomeShit = function(req, res){
 	var results = "nothing";
@@ -75,6 +80,8 @@ createUser = function(req, token, count, callback){
 			}
 		});
 		console.log(userURI);
+		console.log('-------------------');
+		console.log(myBody);
 		request({
 			method: 'post',
 			uri: userURI,
@@ -110,8 +117,9 @@ validateCreateFields =  function(req, res, callback){
 		if(validationPass === false){
 			console.log(validations);
 			res.render('users', {validationErrors:validations});
+		} else {
+			callback(validations);
 		}
-	callback(validations);
 }
 getPriority = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-12513/AllowedValues";
