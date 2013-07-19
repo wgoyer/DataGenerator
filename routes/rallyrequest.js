@@ -1,4 +1,5 @@
 var request = require('request');
+var async = require('async');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
 exports.getValues = function(req, res, next){
@@ -21,23 +22,63 @@ exports.createUser = function (req, res){
 		});
 	});
 };
+
+
+
+
+
+
+
+exports.createManyUser = function(req,res){
+	//validateCreateFields(req,res,function(){
+		async.waterfall([
+			function(callback){
+				getSecurityToken(function(token){
+					console.log(token);
+					callback(null, token);
+				});
+			},
+			function(token, callback){
+				console.log("I am in the second function");
+				console.log(token);
+				callback(null, 'testTwo');
+			},
+			function(callback){
+				console.log("I am the third in this function");
+				callback(null, 'testThree');
+			}	
+		],
+			function(err, results){
+				console.log(results);
+				res.render('users',{validationErrors:true});
+			}
+		);
+	//});
+
+};
+
+/*
 exports.createManyUser = function(req, res){
 	validateCreateFields(req, res, function(){
 		var q;
 		var count = req.body.cCount;
-		for(q=0;q<count;q++){
+		for(q=1;q<=count;q++){
 			(function(q) {
 				getSecurityToken(function(token){
 					console.log(token, q);
 					createUser(req, token, q, function(body){
-						console.log(body);
-						//res.render('users', {validationErrors:true});
+						console.log(body+"\n\r");
+						if(q === count){
+							res.render('users', {validationErrors:true});
+						}
 					});
 				});
 			})(q);
 		};
 	});
 };
+*/
+
 exports.users = function(req,res){
 	res.render('users', {validationErrors:true});
 };
@@ -94,7 +135,7 @@ createUser = function(req, token, count, callback){
 }
 validateCreateFields =  function(req, res, callback){
 	var emailRegex = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-	var validations = [true,true,true,true,true];
+	var validations = true;
 	var validationPass = true;
 	if(!emailRegex.test(req.body.cEmail)){
 		validations[0]=false;
