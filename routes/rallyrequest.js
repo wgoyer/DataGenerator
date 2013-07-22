@@ -31,30 +31,37 @@ exports.createUser = function (req, res){
 
 exports.createManyUser = function(req,res){
 	//validateCreateFields(req,res,function(){
-		async.waterfall([
-			function(callback){
-				getSecurityToken(function(token){
-					console.log(token);
-					callback(null, token);
-				});
-			},
-			function(token, callback){
-				console.log("I am in the second function");
-				console.log(token);
-				callback(null, 'testTwo');
+		var i = 0;
+		var count = req.body.cCount;
+		async.whilst(
+			function(){
+				if(i < count);
 			},
 			function(callback){
-				console.log("I am the third in this function");
-				callback(null, 'testThree');
-			}	
-		],
-			function(err, results){
-				console.log(results);
-				res.render('users',{validationErrors:true});
+				i++;
+				async.waterfall([
+					function(callback){
+						getSecurityToken(function(token){
+							console.log(token);
+							callback(null, token);
+						});
+					},
+					function(token, callback){
+						console.log("I am in the second function");
+						createUser(req, token, i, function(body){
+							callback(null, body);	
+						});
+					}	
+				],
+				function(err, results){
+					console.log(results);
+					if(i >= count){
+						res.render('users',{validationErrors:true});
+					};
+				}
+				);
 			}
-		);
 	//});
-
 };
 
 /*
