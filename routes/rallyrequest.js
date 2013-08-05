@@ -13,7 +13,6 @@ exports.getValues = function(req, res, next){
 };
 exports.createUser = function (req, res){
 	validateCreateFields (req, res, function(validations){
-		console.log(validations);
 		getSecurityToken(function(token){
 			createUser(req, token, null, function(body){
 				console.log(body);
@@ -22,18 +21,15 @@ exports.createUser = function (req, res){
 		});
 	});
 };
-
 exports.createManyUser = function(req,res){
 	numOfUsers = req.body.cCount;
 	validateCreateFields(req,res,function(){
   		myTerribleLoop(numOfUsers);
   		function myTerribleLoop(iterations){
   			if(iterations < 1) {
-  				console.log("Base case hit");
   				res.render('users', {validationErrors:true});
   				return;
   			} else {
-  				console.log(iterations);
   				iterations--;
   				async.waterfall([
       				function(callback){
@@ -43,19 +39,12 @@ exports.createManyUser = function(req,res){
         				});
       				},		
   					function(token, callback){
-        				console.log("I am in the second function");
         				createUser(req, token, iterations, function(body){
-        					callback(null, 'testTwo');
+        					callback(null);
     					});
-  					},
-  					function(token, callback){
-      		  			console.log("I am the third in this function");
-        				callback(null, 'testThree');
-      				}  
+  					}
     			],
 					function(err, results){
-       					console.log(results);
-        				res.render('users',{validationErrors:true});
         				myTerribleLoop(iterations);
       				}
     			);
@@ -63,30 +52,6 @@ exports.createManyUser = function(req,res){
 		};
 	});
 };
-
-
-/*
-exports.createManyUser = function(req, res){
-	validateCreateFields(req, res, function(){
-		var q;
-		var count = req.body.cCount;
-		for(q=1;q<=count;q++){
-			(function(q) {
-				getSecurityToken(function(token){
-					console.log(token, q);
-					createUser(req, token, q, function(body){
-						console.log(body+"\n\r");
-						if(q === count){
-							res.render('users', {validationErrors:true});
-						}
-					});
-				});
-			})(q);
-		};
-	});
-};
-*/
-
 exports.users = function(req,res){
 	res.render('users', {validationErrors:true});
 };
@@ -117,7 +82,6 @@ exports.buildQuery = function(req, res, next){
 	next();
 };
 createUser = function(req, token, count, callback){
-	console.log(rallyAuth);
 	if(typeof(count) != "number"){
 		count="";
 	}
@@ -138,7 +102,6 @@ createUser = function(req, token, count, callback){
 			uri: userURI,
 			body: myBody
 		}, function(error,response,body){
-			console.log(response);
 			callback(body);
 		}).auth(rallyAuth[0], rallyAuth[1], false);
 }
