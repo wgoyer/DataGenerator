@@ -23,46 +23,47 @@ exports.createUser = function (req, res){
 	});
 };
 
-
-
-
-
-
-
 exports.createManyUser = function(req,res){
-	//validateCreateFields(req,res,function(){
-		var i = 0;
-		var count = req.body.cCount;
-		async.whilst(
-			function(){
-				if(i < count);
-			},
-			function(callback){
-				i++;
-				async.waterfall([
-					function(callback){
-						getSecurityToken(function(token){
-							console.log(token);
-							callback(null, token);
-						});
-					},
-					function(token, callback){
-						console.log("I am in the second function");
-						createUser(req, token, i, function(body){
-							callback(null, body);	
-						});
-					}	
-				],
-				function(err, results){
-					console.log(results);
-					if(i >= count){
-						res.render('users',{validationErrors:true});
-					};
-				}
-				);
-			}
-	//});
+	numOfUsers = req.body.cCount;
+	validateCreateFields(req,res,function(){
+  		myTerribleLoop(numOfUsers);
+  		function myTerribleLoop(iterations){
+  			if(iterations < 1) {
+  				console.log("Base case hit");
+  				res.render('users', {validationErrors:true});
+  				return;
+  			} else {
+  				console.log(iterations);
+  				iterations--;
+  				async.waterfall([
+      				function(callback){
+        				getSecurityToken(function(token){
+          					console.log(token);
+          					callback(null, token);
+        				});
+      				},		
+  					function(token, callback){
+        				console.log("I am in the second function");
+        				createUser(req, token, iterations, function(body){
+        					callback(null, 'testTwo');
+    					});
+  					},
+  					function(token, callback){
+      		  			console.log("I am the third in this function");
+        				callback(null, 'testThree');
+      				}  
+    			],
+					function(err, results){
+       					console.log(results);
+        				res.render('users',{validationErrors:true});
+        				myTerribleLoop(iterations);
+      				}
+    			);
+			};
+		};
+	});
 };
+
 
 /*
 exports.createManyUser = function(req, res){
@@ -116,6 +117,7 @@ exports.buildQuery = function(req, res, next){
 	next();
 };
 createUser = function(req, token, count, callback){
+	console.log(rallyAuth);
 	if(typeof(count) != "number"){
 		count="";
 	}
@@ -130,15 +132,15 @@ createUser = function(req, token, count, callback){
 			}
 		});
 		console.log(userURI);
-		console.log('-------------------');
 		console.log(myBody);
 		request({
 			method: 'post',
 			uri: userURI,
 			body: myBody
 		}, function(error,response,body){
+			console.log(response);
 			callback(body);
-		});
+		}).auth(rallyAuth[0], rallyAuth[1], false);
 }
 validateCreateFields =  function(req, res, callback){
 	var emailRegex = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
