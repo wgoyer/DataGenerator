@@ -1,4 +1,5 @@
 var request = require('request');
+var moment = require('moment');
 var async = require('async');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
@@ -14,7 +15,7 @@ exports.getValues = function(req, res, next){
 exports.createUser = function (req, res){
 	validateCreateFields (req, res, function(validations){
 		getSecurityToken(function(token){
-			createUser(req, token, null, function(body){
+			generateUser(req, token, null, function(body){
 				console.log(body);
 				res.render('users', {validationErrors:true});
 			});
@@ -34,12 +35,11 @@ exports.createManyUser = function(req,res){
   				async.waterfall([
       				function(callback){
         				getSecurityToken(function(token){
-          					console.log(token);
           					callback(null, token);
         				});
       				},		
   					function(token, callback){
-        				createUser(req, token, iterations, function(body){
+        				generateUser(req, token, iterations, function(body){
         					callback(null);
     					});
   					}
@@ -52,6 +52,18 @@ exports.createManyUser = function(req,res){
 		};
 	});
 };
+exports.iteration = function(req, res){
+	res.render('iteration');
+}
+exports.createIteration = function(req, res){
+	console.log(req.body);
+	getSecurityToken(function(token){
+		generateIteration(req, token, null, function(body){
+			console.log(body);
+			res.render('iteration');
+		});	
+	});
+}
 exports.users = function(req,res){
 	res.render('users', {validationErrors:true});
 };
@@ -81,7 +93,35 @@ exports.buildQuery = function(req, res, next){
 	getQueryString(req, values, helper);
 	next();
 };
-createUser = function(req, token, count, callback){
+
+generateIteration = function(req, token, count, callback){
+	if(typeof(count) != "number"){
+		count="";
+	}
+	var endDate = moment(req.body.iEndDate).format();
+	var startDate = moment(req.body.iStartDate).format();
+	console.log(endDate);
+	console.log(startDate);
+	var userURI = baseURI+"/iteration/create?key="+token;
+	var myBody = JSON.stringify({
+		"Iteration":{
+			"EndDate": endDate,
+			"StartDate": startDate,
+			"State": req.body.iState,
+			"Name": req.body.iName
+		}
+	});
+	console.log(myBody);
+	request({
+		method: 'post',
+		uri: userURI,
+		body: myBody
+	}, function(error,response,body){
+		callback(body);
+	}).auth(rallyAuth[0], rallyAuth[1], false);
+}
+
+generateUser = function(req, token, count, callback){
 	if(typeof(count) != "number"){
 		count="";
 	}
@@ -92,11 +132,9 @@ createUser = function(req, token, count, callback){
 				"FirstName":req.body.cFirst+count,
 				"LastName":req.body.cLast+count,
 				"DisplayName":req.body.cDisplay+count,
-				"UserName": count+req.body.cUser,
+				"UserName": count+req.body.cUser
 			}
 		});
-		console.log(userURI);
-		console.log(myBody);
 		request({
 			method: 'post',
 			uri: userURI,

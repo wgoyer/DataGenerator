@@ -1,0 +1,54 @@
+html
+	head
+		title Iteration Generate
+
+		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
+		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
+		link(rel='stylesheet', href='stylesheets/iteration.css')	
+		script.
+			$(function(){
+				$("#iteration").draggable();
+				$(".inp-buttons").button();
+				$("#createIteration #xplode").button();
+				$("#iStartDate").datepicker();
+				$("#iEndDate").datepicker();
+			});
+		body
+			#iteration
+				form(method='post', action='/iteration')
+					table
+						tr
+							td
+								h3 Iteration
+						tr
+							td Name:
+							td
+								input(type='text', name='iName')
+						tr
+							td Start Date:
+							td
+								input(type='none', name='iStartDate', id='iStartDate', class='dateField')
+						tr
+							td End Date:
+							td
+								input(type='none', name='iEndDate', id='iEndDate', class='dateField')
+						tr
+							td State:
+							td
+								//-This select tool needs to be changed to pull the values from Rally.
+								select(name='iState')
+									option(value='Planning')
+										value Planning
+									option(value='Committed')
+										value Committed
+									option(value='Accepted')
+										value Accepted
+					input(class='inp-buttons', id='createIteration', type='submit', value='Create')
+					input(class='inp-buttons', id='xplode', type='button', value='Multi-Create')
+				form(method='get', action='/iterationQuery')
+					input(class='inp-buttons', id='query', type='submit', value='Query', )
+
+
+
+

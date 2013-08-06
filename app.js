@@ -14,11 +14,13 @@ app.configure(function(){
 
 app.get('/', rallyrequest.getValues, rallyrequest.renderSomeShit);
 app.get('/users', rallyrequest.users);
+app.get('/iteration', rallyrequest.iteration);
 
 app.post('/createUser', rallyrequest.createUser);
 app.post('/defect', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.defect);
 app.post('/story', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.userStory);
 app.post('/createManyUser', rallyrequest.createManyUser);
+app.post('/iteration', rallyrequest.createIteration);
 
 
 app.listen(8080);
