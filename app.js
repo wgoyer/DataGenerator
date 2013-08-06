@@ -12,7 +12,8 @@ app.configure(function(){
 	app.use(express.static('public'));
 });
 
-app.get('/', rallyrequest.getValues, rallyrequest.renderSomeShit);
+app.get('/', rallyrequest.renderSomeShit);
+app.get('/query', rallyrequest.getValues, rallyrequest.renderSomeShit);
 app.get('/users', rallyrequest.users);
 app.get('/iteration', rallyrequest.iteration);
 

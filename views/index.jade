@@ -1,54 +1,10 @@
 html
 	head
-		title Make a request
+		title Make a selection
 	body
-		h2 Let's request an artifact
-		#myDefect(style = 'height: 260px; width: 275px; border: 2px black solid; border-radius: 5px;float:left')
-			form(method='post', action='/defect')
-				table
-					tr
-						td
-							h3 Defect
-					tr
-						td Name:
-						td
-							input(type = 'text', name="dName")
-					tr 
-						td Severity:
-						td	
-							select(name='dSeverity')
-								- for(i = 0; i < indexSeverity.length; i++)
-									option(value='#{indexSeverity[i]}')
-										value #{indexSeverity[i]}
-						tr
-						td Priority:
-						td
-							select(name='dPriority')
-								- for(i = 0; i < indexPriority.length; i++)
-									option(value='#{indexPriority[i]}')
-										value #{indexPriority[i]}
-						br
-				input(type='submit', value='Query', style='margin-left:5px')
-		#myStory(style = 'height: 260px; width: 275px; border: 2px black solid; border-radius: 5px;float:left;position: relative;margin-left:10px')
-			form(method='post', action='/story')
-				table
-					tr
-						td
-							h3 Story
-					tr
-						td Name:
-						td
-							input(type = 'text', name="sName")
-					tr 
-						td State:
-						td	
-							select(name='sState')
-								- for(i = 0; i < indexState.length; i++)
-									option(value='#{indexState[i]}')
-										value #{indexState[i]}
-						br
-				input(type='submit', value='Query', style='margin-left:5px')
-		br
-		#myResults(style = 'height: 900px; width: 800px; border: 2px black solid; border-radius: 5px;float:left; margin-top:10px')
-			- for(var i = 0; i<output.length; i++)
-				p #{output[i]._refObjectName}
+		form(method='get', action='/users')
+			input(class='inp-buttons', type='submit', value='Users')
+		form(method='get', action='/iteration')
+			input(class='inp-buttons', type='submit', value='Iterations')
+		form(method='get', action='/query')
+			input(class='inp-buttons', type='submit', value='Query')

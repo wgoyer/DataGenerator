@@ -1,6 +1,5 @@
 var request = require('request');
 var moment = require('moment');
-var async = require('async');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
 exports.getValues = function(req, res, next){
@@ -25,29 +24,18 @@ exports.createUser = function (req, res){
 exports.createManyUser = function(req,res){
 	numOfUsers = req.body.cCount;
 	validateCreateFields(req,res,function(){
-  		myTerribleLoop(numOfUsers);
-  		function myTerribleLoop(iterations){
-  			if(iterations < 1) {
-  				res.render('users', {validationErrors:true});
-  				return;
-  			} else {
-  				iterations--;
-  				async.waterfall([
-      				function(callback){
-        				getSecurityToken(function(token){
-          					callback(null, token);
-        				});
-      				},		
-  					function(token, callback){
-        				generateUser(req, token, iterations, function(body){
-        					callback(null);
-    					});
-  					}
-    			],
-					function(err, results){
-        				myTerribleLoop(iterations);
-      				}
-    			);
+		createUserRecurse(numOfUsers);
+		function createUserRecurse(iterations){
+			if(iterations <= 0){
+				res.render('users', {validationErrors:true});
+				return;
+			} else {
+				getSecurityToken(function(token){
+					generateUser(req,token,iterations,function(body){
+						console.log(body);
+						createUserRecurse(iterations-1);
+					});
+				});
 			};
 		};
 	});
@@ -93,7 +81,6 @@ exports.buildQuery = function(req, res, next){
 	getQueryString(req, values, helper);
 	next();
 };
-
 generateIteration = function(req, token, count, callback){
 	if(typeof(count) != "number"){
 		count="";
@@ -120,7 +107,6 @@ generateIteration = function(req, token, count, callback){
 		callback(body);
 	}).auth(rallyAuth[0], rallyAuth[1], false);
 }
-
 generateUser = function(req, token, count, callback){
 	if(typeof(count) != "number"){
 		count="";
