@@ -1,9 +1,10 @@
 html
 	head
 		title Make a request
+		link(rel='stylesheet', href='stylesheets/mainStyle.css')
 	body
 		h2 Let's request an artifact
-		#myDefect(style = 'height: 260px; width: 275px; border: 2px black solid; border-radius: 5px;float:left')
+		#myDefect
 			form(method='post', action='/defect')
 				table
 					tr
@@ -29,7 +30,7 @@ html
 										value #{indexPriority[i]}
 						br
 				input(type='submit', value='Query', style='margin-left:5px')
-		#myStory(style = 'height: 260px; width: 275px; border: 2px black solid; border-radius: 5px;float:left;position: relative;margin-left:10px')
+		#myStory
 			form(method='post', action='/story')
 				table
 					tr
@@ -49,6 +50,6 @@ html
 						br
 				input(type='submit', value='Query', style='margin-left:5px')
 		br
-		#myResults(style = 'height: 900px; width: 800px; border: 2px black solid; border-radius: 5px;float:left; margin-top:10px')
+		#myResults
 			- for(var i = 0; i<output.length; i++)
 				p #{output[i]._refObjectName}

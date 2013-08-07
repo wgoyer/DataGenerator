@@ -13,6 +13,8 @@ exports.getValues = function(req, res, next){
 };
 exports.createUser = function (req, res){
 	validateCreateFields (req, res, function(validations){
+		console.log(validations);
+		if(validations===false) return;
 		getSecurityToken(function(token){
 			generateUser(req, token, null, function(body){
 				console.log(body);
@@ -24,6 +26,7 @@ exports.createUser = function (req, res){
 exports.createManyUser = function(req,res){
 	numOfUsers = req.body.cCount;
 	validateCreateFields(req,res,function(){
+		if(validations===false) return;
 		createUserRecurse(numOfUsers);
 		function createUserRecurse(iterations){
 			if(iterations <= 0){
@@ -52,19 +55,27 @@ exports.createIteration = function(req, res){
 		});	
 	});
 }
+exports.createManyIteration = function(req, res){
+	console.log(req.body);
+	res.render('iteration');
+}
+
 exports.users = function(req,res){
 	res.render('users', {validationErrors:true});
 };
-exports.renderSomeShit = function(req, res){
+exports.index = function(req, res){
+	res.render('index');
+}
+exports.query = function(req, res){
 	var results = "nothing";
-	res.render('index', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});	
+	res.render('query', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
 };
 exports.userStory = function(req, res){
 	var URI = baseURI + req.queryString;
 	request(URI, function(error, response, body){
 		var parsedJSON = JSON.parse(body);
 		var results = parsedJSON.QueryResult.Results;
-		res.render('index', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
+		res.render('query', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
 	}).auth(rallyAuth[0], rallyAuth[1], false);
 };
 exports.defect = function(req, res){
@@ -72,7 +83,7 @@ exports.defect = function(req, res){
 	request(URI, function(error, response, body){
 		var parsedjson = JSON.parse(body);
 		var results = parsedjson.QueryResult.Results;
-		res.render('index',{output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
+		res.render('query',{output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
 	}).auth(rallyAuth[0], rallyAuth[1], false);
 };
 exports.buildQuery = function(req, res, next){
@@ -82,13 +93,13 @@ exports.buildQuery = function(req, res, next){
 	next();
 };
 generateIteration = function(req, token, count, callback){
+	var endDate = req.body.iEndDate;
+	console.log(endDate);
 	if(typeof(count) != "number"){
 		count="";
 	}
 	var endDate = moment(req.body.iEndDate).format();
 	var startDate = moment(req.body.iStartDate).format();
-	console.log(endDate);
-	console.log(startDate);
 	var userURI = baseURI+"/iteration/create?key="+token;
 	var myBody = JSON.stringify({
 		"Iteration":{

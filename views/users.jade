@@ -7,6 +7,7 @@ html
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
 		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
+		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
 		script.
 			$(function(){
 				$("#myUser").draggable();
@@ -26,7 +27,7 @@ html
 			});
 	body
 		h2 Create a user
-		#myUser(style = 'height: 270px; width: 275px; border: 2px black solid; border-radius: 5px;float:left')
+		#myUser
 			form(method='post', action='/createUser')
 				table
 					tr
@@ -67,9 +68,9 @@ html
 							td Display Name:
 						td
 							input(type = "text", name='cDisplay')
-				input(id="createUser", type='submit', value='Create', style='margin-left:5px')
-				input(id='xplode', type='button', value='xPlode!', style='margin-left:5px')
-		#myUserGenerator(style = 'height: 375px; width: 305px; border: 2px black solid; border-radius: 5px;float:left; display: none')
+				input(id="createUser", type='submit', value='Create', class='inp-buttons')
+				input(id='xplode', type='button', value='xPlode!', class='inp-buttons')
+		#myUserGenerator
 			form(method='post', action='/createManyUser')
 				table
 					tr
@@ -115,5 +116,5 @@ html
 						td
 							input(id="spinMe", type = "text", name="cCount")
 				br
-				input(id="createUsers", type='submit', value='Create', style='margin-left:5px')
-				input(id='rplode', type='button', value='xPlode!', style='margin-left:5px')
+				input(id="createUsers", type='submit', value='Create', class='inp-buttons')
+				input(id='rplode', type='button', value='xPlode!', class='inp-buttons')

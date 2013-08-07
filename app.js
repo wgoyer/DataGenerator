@@ -12,8 +12,8 @@ app.configure(function(){
 	app.use(express.static('public'));
 });
 
-app.get('/', rallyrequest.renderSomeShit);
-app.get('/query', rallyrequest.getValues, rallyrequest.renderSomeShit);
+app.get('/', rallyrequest.index);
+app.get('/query', rallyrequest.getValues, rallyrequest.query);
 app.get('/users', rallyrequest.users);
 app.get('/iteration', rallyrequest.iteration);
 
@@ -22,6 +22,7 @@ app.post('/defect', rallyrequest.buildQuery, rallyrequest.getValues, rallyreques
 app.post('/story', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.userStory);
 app.post('/createManyUser', rallyrequest.createManyUser);
 app.post('/iteration', rallyrequest.createIteration);
+app.post('/multiIteration', rallyrequest.createManyIteration);
 
 
 app.listen(8080);

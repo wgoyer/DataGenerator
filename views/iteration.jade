@@ -5,14 +5,23 @@ html
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
 		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
-		link(rel='stylesheet', href='stylesheets/iteration.css')	
+		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
 		script.
 			$(function(){
 				$("#iteration").draggable();
+				$("#spinMe").spinner({min:2}).val(2);
 				$(".inp-buttons").button();
-				$("#createIteration #xplode").button();
-				$("#iStartDate").datepicker();
-				$("#iEndDate").datepicker();
+				$(".dateField").datepicker();
+				$("#xPlode").click(function(){
+					$("#iteration").toggle("explode", function(){
+						$("#multiIteration").toggle("explode")
+					});
+				});
+				$("#rPlode").click(function(){
+					$("#multiIteration").toggle("explode", function(){
+						$("#iteration").toggle("explode")
+					});	
+				});
 			});
 		body
 			#iteration
@@ -45,9 +54,44 @@ html
 									option(value='Accepted')
 										value Accepted
 					input(class='inp-buttons', id='createIteration', type='submit', value='Create')
-					input(class='inp-buttons', id='xplode', type='button', value='Multi-Create')
+					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
 				form(method='get', action='/iterationQuery')
-					input(class='inp-buttons', id='query', type='submit', value='Query', )
+					input(class='inp-buttons', id='query', type='submit', value='Query')
+			#multiIteration
+				form(method='post', action='/multiIteration')
+					table
+						tr
+							td
+								h3 Iterations
+						tr
+							td Name:
+							td
+								input(type='text', name='iName')
+						tr
+							td Start Date:
+							td
+								input(type='none', name='iStartDate', id='iMStartDate', class='dateField')
+						tr
+							td End Date:
+							td
+								input(type='none', name='iEndDate', id='iMEndDate', class='dateField')
+						tr
+							td State:
+							td
+								select(name='iState')
+									option(value='Planning')
+										value Planning
+									option(value='Committed')
+										value Committed
+									option(value='Accepted')
+										value Accepted
+						tr
+							td Quantity:
+							td
+								input(type='text', id='spinMe', name='iCount')
+					input(class='inp-buttons', id='iCreate', type='submit', value='Create')
+					input(class='inp-buttons', id='rPlode', value='xPlode!')	
+
 
 
 
