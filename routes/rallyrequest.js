@@ -56,7 +56,8 @@ exports.createIteration = function(req, res){
 	});
 }
 exports.createManyIteration = function(req, res){
-	console.log(req.body);
+	console.log(req.body.iEndDate);
+
 	res.render('iteration');
 }
 
@@ -98,7 +99,7 @@ generateIteration = function(req, token, count, callback){
 	if(typeof(count) != "number"){
 		count="";
 	}
-	var endDate = moment(req.body.iEndDate).format();
+	endDate = moment(endDate).format();
 	var startDate = moment(req.body.iStartDate).format();
 	var userURI = baseURI+"/iteration/create?key="+token;
 	var myBody = JSON.stringify({
@@ -106,7 +107,7 @@ generateIteration = function(req, token, count, callback){
 			"EndDate": endDate,
 			"StartDate": startDate,
 			"State": req.body.iState,
-			"Name": req.body.iName
+			"Name": count+req.body.iName
 		}
 	});
 	console.log(myBody);

@@ -1,7 +1,14 @@
 html
 	head
 		title Make a request
+		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
+		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
 		link(rel='stylesheet', href='stylesheets/mainStyle.css')
+		script.
+			$(function(){
+				$(".inp-buttons").button();
+			});
 	body
 		h2 Let's request an artifact
 		#myDefect
@@ -29,7 +36,7 @@ html
 									option(value='#{indexPriority[i]}')
 										value #{indexPriority[i]}
 						br
-				input(type='submit', value='Query', style='margin-left:5px')
+				input(type='submit', value='Query', class='inp-buttons')
 		#myStory
 			form(method='post', action='/story')
 				table
@@ -48,7 +55,7 @@ html
 									option(value='#{indexState[i]}')
 										value #{indexState[i]}
 						br
-				input(type='submit', value='Query', style='margin-left:5px')
+				input(type='submit', value='Query', class='inp-buttons')
 		br
 		#myResults
 			- for(var i = 0; i<output.length; i++)
