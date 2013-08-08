@@ -3,3 +3,4 @@ public/stylesheets/custom-theme
 public/stylesheets/ui-darkness
 public/Images
 node_modules
+.DS_Store
