@@ -1,7 +1,10 @@
 var express = require('express')
 , path = require('path')
-, rallyrequest = require('./routes/rallyrequest.js')
+, index = require('./routes/index.js')
 , release = require('./routes/release.js')
+, query = require('./routes/query.js')
+, users = require('./routes/users.js')
+, iteration = require('./routes/iteration.js')
 , routes = require('./routes')
 
 var app = express();
@@ -13,18 +16,18 @@ app.configure(function(){
 	app.use(express.static('public'));
 });
 
-app.get('/', rallyrequest.index);
-app.get('/query', rallyrequest.getValues, rallyrequest.query);
-app.get('/users', rallyrequest.users);
-app.get('/iteration', rallyrequest.iteration);
+app.get('/', index.index);
+app.get('/query', query.getValues, query.rend);
+app.get('/users', users.rend);
+app.get('/iteration', iteration.rend);
 app.get('/release', release.rend);
 
-app.post('/createUser', rallyrequest.createUser);
-app.post('/defect', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.defect);
-app.post('/story', rallyrequest.buildQuery, rallyrequest.getValues, rallyrequest.userStory);
-app.post('/createManyUser', rallyrequest.createManyUser);
-app.post('/iteration', rallyrequest.createIteration);
-app.post('/multiIteration', rallyrequest.createManyIteration);
+app.post('/createUser', users.createUser);
+app.post('/createManyUser', users.createManyUser);
+app.post('/defect', query.buildQuery, query.getValues, query.defect);
+app.post('/story', query.buildQuery, query.getValues, query.userStory);
+app.post('/iteration', iteration.createIteration);
+app.post('/multiIteration', iteration.createManyIteration);
 app.post('/release', release.createRelease);
 app.post('/multiRelease', release.createManyRelease);
 

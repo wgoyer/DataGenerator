@@ -5,33 +5,31 @@ var rallyAuth = require('../ignore/rallyAuth');
 var sec = require('./security');
 
 exports.rend = function(req, res){
-	res.render('release');
+	res.render('iteration');
 }
-
-exports.createRelease = function(req, res){
-	var dateRange = [moment(req.body.rStartDate).format(), moment(req.body.rEndDate).format()];
+exports.createIteration = function(req, res){
+	var dateRange = [moment(req.body.iStartDate).format(), moment(req.body.iEndDate).format()];
 	sec.getSecurityToken(function(token){
-		generateRelease(req, token, null, dateRange, function(body){
+		generateIteration(req, token, null, dateRange, function(body){
 			console.log(body);
-			res.render('release');
+			res.render('iteration');
 		});	
 	});
 }
-
-exports.createManyRelease = function(req, res){
-	var startDate = new moment(req.body.rStartDate);
-	var endDate = new moment(req.body.rEndDate);
+exports.createManyIteration = function(req, res){
+	var startDate = new moment(req.body.iStartDate);
+	var endDate = new moment(req.body.iEndDate);
 	var dateRange=[startDate.format(),endDate.format()];
 	var difference = endDate.diff(startDate, 'days');
-	var numOfIterations = req.body.rCount;
+	var numOfIterations = req.body.iCount;
 	createIterationRecurse(numOfIterations);
 	function createIterationRecurse(iterations){
 		if(iterations <= 0){
-			res.render('release');
+			res.render('iteration');
 			return;
 		} else {
 			sec.getSecurityToken(function(token){
-				generateRelease(req,token,iterations,dateRange,function(body){
+				generateIteration(req,token,iterations,dateRange,function(body){
 					console.log(body);
 					startDate.add('days', difference);
 					endDate.add('days', difference);
@@ -41,19 +39,18 @@ exports.createManyRelease = function(req, res){
 			});
 		};
 	};
-}
-
-generateRelease = function(req, token, count, dateRange, callback){
+};
+generateIteration = function(req, token, count, dateRange, callback){
 	if(typeof(count) != "number"){
 		count="";
 	}
-	var userURI = baseURI+"/release/create?key="+token;
+	var userURI = baseURI+"/iteration/create?key="+token;
 	var myBody = JSON.stringify({
-		"Release":{
-			"ReleaseStartDate": dateRange[0],
-			"ReleaseDate": dateRange[1],
-			"State": req.body.rState,
-			"Name": count+req.body.rName
+		"Iteration":{
+			"StartDate": dateRange[0],
+			"EndDate": dateRange[1],
+			"State": req.body.iState,
+			"Name": count+req.body.iName
 		}
 	});
 	console.log(myBody);
@@ -64,4 +61,4 @@ generateRelease = function(req, token, count, dateRange, callback){
 	}, function(error,response,body){
 		callback(body);
 	}).auth(rallyAuth[0], rallyAuth[1], false);
-}
+};
