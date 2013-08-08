@@ -19,7 +19,7 @@ exports.createUser = function (req, res){
 	});
 };
 exports.createManyUser = function(req,res){
-	numOfUsers = req.body.cCount;
+	var numOfUsers = req.body.cCount;
 	validateCreateFields(req,res,function(validations){
 		if(validations===false) return;
 		createUserRecurse(numOfUsers);

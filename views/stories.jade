@@ -1,0 +1,82 @@
+html
+	head
+		title Story Generate
+
+		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
+		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
+		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
+		script.
+			$(function(){
+				$("#story").draggable();
+				$("#createStory").click(function(){
+					$("#storyForm").submit();
+				});
+				$("#multiCreate").click(function(){
+					$("#multiStoryForm").submit();
+				});
+				$("#createMulti")
+				$("#multiStory").draggable();
+				$("#spinMe").spinner({min:2}).val(2);
+				$(".inp-buttons").button();
+				$("#xPlode").click(function(){
+					$("#story").toggle("explode", function(){
+						$("#multiStory").toggle("explode")
+					});
+				});
+				$("#rPlode").click(function(){
+					$("#multiStory").toggle("explode", function(){
+						$("#story").toggle("explode")
+					});	
+				});
+			});
+		body
+			#story
+				form(id='storyForm', method='post', action='/createStory')
+					table
+						tr
+							td
+								h3 Story
+						tr
+							td Name:
+							td
+								input(type='text', name='sName')
+						tr
+							td State:
+							td
+								select(name='sState')
+									- for(i = 0; i < indexState.length; i++)
+										option(value='#{indexState[i]}')
+											value #{indexState[i]}
+				#sbuttons(class='buttonDiv')
+					input(class='inp-buttons', id='createStory', type='submit', value='Create')
+					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
+			#multiStory(class='multiBox')
+				form(id='multiStoryForm', method='post', action='/multiStory')
+					table
+						tr
+							td
+								h3 Stories
+						tr
+							td Name:
+							td
+								input(type='text', name='sName')
+						tr
+							td State:
+							td
+								select(name='sState')
+									- for(i = 0; i < indexState.length; i++)
+										option(value='#{indexState[i]}')
+											value #{indexState[i]}
+						tr
+							td Quantity:
+							td
+								input(type='text', id='spinMe', name='iCount')
+				#mbuttons(class='buttonDiv')
+					input(class='inp-buttons', id='multiCreate', type='submit', value='Create')
+					input(class='inp-buttons', type='button', id='rPlode', value='xPlode!')	
+
+
+
+
+

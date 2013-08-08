@@ -5,6 +5,7 @@ var express = require('express')
 , query = require('./routes/query.js')
 , users = require('./routes/users.js')
 , iteration = require('./routes/iteration.js')
+, stories = require('./routes/stories')
 , routes = require('./routes')
 
 var app = express();
@@ -21,8 +22,11 @@ app.get('/query', query.getValues, query.rend);
 app.get('/users', users.rend);
 app.get('/iteration', iteration.rend);
 app.get('/release', release.rend);
+app.get('/stories', query.getValues, stories.rend);
 
 app.post('/createUser', users.createUser);
+app.post('/multiStory', stories.createMultiStory);
+app.post('/createStory', stories.createStory);
 app.post('/createManyUser', users.createManyUser);
 app.post('/defect', query.buildQuery, query.getValues, query.defect);
 app.post('/story', query.buildQuery, query.getValues, query.userStory);

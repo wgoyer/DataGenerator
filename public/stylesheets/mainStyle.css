@@ -1,3 +1,7 @@
+.buttonDiv{
+	position: absolute;
+	bottom: 5px;
+}
 .inp-buttons{
 	margin-left:5px;
 	margin-top:5px;
@@ -20,7 +24,14 @@
 	background-color: lightblue;
 	display: none;
 }
-
+#story{
+	height:260px;
+	width:275px;
+	border:2px black solid;
+	border-radius:5px;
+	float:left;
+	background-color: lightblue;
+}
 #iteration{
 	height:260px;
 	width:275px;

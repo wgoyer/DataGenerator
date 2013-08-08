@@ -9,6 +9,7 @@ html
 		script.
 			$(function(){
 				$("#release").draggable();
+				$("#multiRelease").draggable();
 				$("#spinMe").spinner({min:2}).val(2);
 				$(".inp-buttons").button();
 				$(".dateField").datepicker();
@@ -53,10 +54,9 @@ html
 										value Committed
 									option(value='Accepted')
 										value Accepted
+				#sbuttons(class='buttonDiv')
 					input(class='inp-buttons', id='createRelease', type='submit', value='Create')
-					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
-				form(method='get', action='/releaseQuery')
-					input(class='inp-buttons', id='query', type='submit', value='Query')
+					input(class='inp-buttons', type='button', id='xPlode', type='button', value='xPlode!')
 			#multiRelease(class='multiBox')
 				form(method='post', action='/multiRelease')
 					table
@@ -89,5 +89,6 @@ html
 							td Quantity:
 							td
 								input(type='text', id='spinMe', name='rCount')
-					input(class='inp-buttons', id='rCreate', type='submit', value='Create')
-					input(class='inp-buttons', id='rPlode', value='xPlode!')
+					#mbuttons(class='buttonDiv')
+						input(class='inp-buttons', id='rCreate', type='submit', value='Create')
+						input(class='inp-buttons', type='button', id='rPlode', value='xPlode!')
