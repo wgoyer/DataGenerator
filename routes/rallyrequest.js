@@ -25,7 +25,7 @@ exports.createUser = function (req, res){
 };
 exports.createManyUser = function(req,res){
 	numOfUsers = req.body.cCount;
-	validateCreateFields(req,res,function(){
+	validateCreateFields(req,res,function(validations){
 		if(validations===false) return;
 		createUserRecurse(numOfUsers);
 		function createUserRecurse(iterations){
@@ -47,19 +47,38 @@ exports.iteration = function(req, res){
 	res.render('iteration');
 }
 exports.createIteration = function(req, res){
-	console.log(req.body);
+	var dateRange = [moment(req.body.iStartDate).format(), moment(req.body.iEndDate).format()];
 	getSecurityToken(function(token){
-		generateIteration(req, token, null, function(body){
+		generateIteration(req, token, null, dateRange, function(body){
 			console.log(body);
 			res.render('iteration');
 		});	
 	});
 }
 exports.createManyIteration = function(req, res){
-	console.log(req.body.iEndDate);
-
-	res.render('iteration');
-}
+	var startDate = new moment(req.body.iStartDate);
+	var endDate = new moment(req.body.iEndDate);
+	var dateRange=[startDate.format(),endDate.format()];
+	var difference = endDate.diff(startDate, 'days');
+	var numOfIterations = req.body.iCount;
+	createIterationRecurse(numOfIterations);
+	function createIterationRecurse(iterations){
+		if(iterations <= 0){
+			res.render('iteration');
+			return;
+		} else {
+			getSecurityToken(function(token){
+				generateIteration(req,token,iterations,dateRange,function(body){
+					console.log(body);
+					startDate.add('days', difference);
+					endDate.add('days', difference);
+					dateRange=[startDate.format(),endDate.format()];
+					createIterationRecurse(iterations-1);
+				});
+			});
+		};
+	};
+};
 
 exports.users = function(req,res){
 	res.render('users', {validationErrors:true});
@@ -93,19 +112,15 @@ exports.buildQuery = function(req, res, next){
 	getQueryString(req, values, helper);
 	next();
 };
-generateIteration = function(req, token, count, callback){
-	var endDate = req.body.iEndDate;
-	console.log(endDate);
+generateIteration = function(req, token, count, dateRange, callback){
 	if(typeof(count) != "number"){
 		count="";
 	}
-	endDate = moment(endDate).format();
-	var startDate = moment(req.body.iStartDate).format();
 	var userURI = baseURI+"/iteration/create?key="+token;
 	var myBody = JSON.stringify({
 		"Iteration":{
-			"EndDate": endDate,
-			"StartDate": startDate,
+			"StartDate": dateRange[0],
+			"EndDate": dateRange[1],
 			"State": req.body.iState,
 			"Name": count+req.body.iName
 		}

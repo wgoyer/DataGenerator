@@ -11,6 +11,15 @@
 	padding-right: 18px;
 	width:100px;
 }
+.multiBox{
+	height: 305px;
+	width: 305px;
+	border: 2px black solid;
+	border-radius: 5px;
+	float: left;
+	background-color: lightblue;
+	display: none;
+}
 
 #iteration{
 	height:260px;
@@ -20,15 +29,6 @@
 	float:left;
 	background-color: lightblue;
 }
-#multiIteration{
-	height: 305px;
-	width: 305px;
-	border: 2px black solid;
-	border-radius: 5px;
-	float: left;
-	background-color: lightblue;
-	display: none;
-}
 #myUser{
 	height: 270px;
 	width: 275px;
@@ -37,14 +37,13 @@
 	float: left;
 	background-color: lightblue;
 }
-#myUserGenerator{
-	height: 285px;
-	width: 305px;
+#release{
+	height: 270px;
+	width: 275px;
 	border: 2px black solid;
 	border-radius: 5px;
 	float: left;
 	background-color: lightblue;
-	display: none;
 }
 #myDefect{
 	height: 260px;

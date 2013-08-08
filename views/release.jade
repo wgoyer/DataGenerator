@@ -1,6 +1,6 @@
 html
 	head
-		title Iteration Generate
+		title Release Generator
 
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
@@ -8,77 +8,77 @@ html
 		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
 		script.
 			$(function(){
-				$("#iteration").draggable();
+				$("#release").draggable();
 				$("#spinMe").spinner({min:2}).val(2);
 				$(".inp-buttons").button();
 				$(".dateField").datepicker();
 				$("#xPlode").click(function(){
-					$("#iteration").toggle("explode", function(){
-						$("#multiIteration").toggle("explode")
+					$("#release").toggle("explode", function(){
+						$("#multiRelease").toggle("explode")
 					});
 				});
 				$("#rPlode").click(function(){
-					$("#multiIteration").toggle("explode", function(){
-						$("#iteration").toggle("explode")
+					$("#multiRelease").toggle("explode", function(){
+						$("#release").toggle("explode")
 					});	
 				});
 			});
 		body
-			#iteration
-				form(method='post', action='/iteration')
+			#release
+				form(method='post', action='/release')
 					table
 						tr
 							td
-								h3 Iteration
+								h3 Release
 						tr
 							td Name:
 							td
-								input(type='text', name='iName')
+								input(type='text', name='rName')
 						tr
 							td Start Date:
 							td
-								input(type='none', name='iStartDate', id='iStartDate', class='dateField')
+								input(type='none', name='rStartDate', id='iStartDate', class='dateField')
 						tr
 							td End Date:
 							td
-								input(type='none', name='iEndDate', id='iEndDate', class='dateField')
+								input(type='none', name='rEndDate', id='iEndDate', class='dateField')
 						tr
 							td State:
 							td
 								//-This select tool needs to be changed to pull the values from Rally.
-								select(name='iState')
+								select(name='rState')
 									option(value='Planning')
 										value Planning
 									option(value='Committed')
 										value Committed
 									option(value='Accepted')
 										value Accepted
-					input(class='inp-buttons', id='createIteration', type='submit', value='Create')
+					input(class='inp-buttons', id='createRelease', type='submit', value='Create')
 					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
-				form(method='get', action='/iterationQuery')
+				form(method='get', action='/releaseQuery')
 					input(class='inp-buttons', id='query', type='submit', value='Query')
-			#multiIteration(class='multiBox')
-				form(method='post', action='/multiIteration')
+			#multiRelease(class='multiBox')
+				form(method='post', action='/multiRelease')
 					table
 						tr
 							td
-								h3 Iterations
+								h3 Releases
 						tr
 							td Name:
 							td
-								input(type='text', name='iName')
+								input(type='text', name='rName')
 						tr
 							td Start Date:
 							td
-								input(type='none', name='iStartDate', id='iMStartDate', class='dateField')
+								input(type='none', name='rStartDate', id='rMStartDate', class='dateField')
 						tr
 							td End Date:
 							td
-								input(type='none', name='iEndDate', id='iMEndDate', class='dateField')
+								input(type='none', name='rEndDate', id='rMEndDate', class='dateField')
 						tr
 							td State:
 							td
-								select(name='iState')
+								select(name='rState')
 									option(value='Planning')
 										value Planning
 									option(value='Committed')
@@ -88,11 +88,6 @@ html
 						tr
 							td Quantity:
 							td
-								input(type='text', id='spinMe', name='iCount')
-					input(class='inp-buttons', id='iCreate', type='submit', value='Create')
-					input(class='inp-buttons', id='rPlode', value='xPlode!')	
-
-
-
-
-
+								input(type='text', id='spinMe', name='rCount')
+					input(class='inp-buttons', id='rCreate', type='submit', value='Create')
+					input(class='inp-buttons', id='rPlode', value='xPlode!')
