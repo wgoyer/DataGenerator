@@ -1,23 +1,56 @@
 html
 	head
 		title Story Generate
-
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
 		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
 		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
 		script.
 			$(function(){
-				$("#story").draggable();
+				function processCreate(multi){
+					console.log(multi);
+					var createUrl = "";
+					var jsStoryCount = "";
+					var jsStoryName = $("#sName").val();
+					var jsStoryState = $("#sState").val();
+					if(multi){
+						createUrl = "/multiStory"
+						jsStoryName = $("#sMName").val();
+						jsStoryState = $("#sMState").val();
+						jsStoryCount = $("#sCount").val();
+					} else {
+						createUrl = "/createStory"
+						jsStoryName = $("#sName").val();
+						jsStoryState = $("#sState").val();
+					}
+					var storyData = {
+						storyName: jsStoryName,
+						storyState: jsStoryState,
+						storyCount: jsStoryCount
+					};
+					console.log(storyData, createUrl);
+					$.ajax({
+						type: "POST",
+						url: createUrl,
+						dataType: "json",
+						data: storyData,
+						success: function(msg){
+							if(msg){
+								console.log(msg);
+							}
+						}
+					});
+				};
 				$("#createStory").click(function(){
-					$("#storyForm").submit();
+					processCreate(false);
 				});
 				$("#multiCreate").click(function(){
-					$("#multiStoryForm").submit();
+					processCreate(true);
 				});
+				$("#story").draggable();
 				$("#createMulti")
 				$("#multiStory").draggable();
-				$("#spinMe").spinner({min:2}).val(2);
+				$("#sCount").spinner({min:2}).val(2);
 				$(".inp-buttons").button();
 				$("#xPlode").click(function(){
 					$("#story").toggle("explode", function(){
@@ -40,16 +73,16 @@ html
 						tr
 							td Name:
 							td
-								input(type='text', name='sName')
+								input(id='sName', type='text', name='storyName')
 						tr
 							td State:
 							td
-								select(name='sState')
+								select(id='sState', name='storyState')
 									- for(i = 0; i < indexState.length; i++)
 										option(value='#{indexState[i]}')
 											value #{indexState[i]}
 				#sbuttons(class='buttonDiv')
-					input(class='inp-buttons', id='createStory', type='submit', value='Create')
+					input(class='inp-buttons', id='createStory', value='Create')
 					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
 			#multiStory(class='multiBox')
 				form(id='multiStoryForm', method='post', action='/multiStory')
@@ -60,18 +93,18 @@ html
 						tr
 							td Name:
 							td
-								input(type='text', name='sName')
+								input(id='sMName',type='text', name='sName')
 						tr
 							td State:
 							td
-								select(name='sState')
+								select(id='sMState', name='sState')
 									- for(i = 0; i < indexState.length; i++)
 										option(value='#{indexState[i]}')
 											value #{indexState[i]}
 						tr
 							td Quantity:
 							td
-								input(type='text', id='spinMe', name='iCount')
+								input(type='text', id='sCount', name='sCount')
 				#mbuttons(class='buttonDiv')
 					input(class='inp-buttons', id='multiCreate', type='submit', value='Create')
 					input(class='inp-buttons', type='button', id='rPlode', value='xPlode!')	
