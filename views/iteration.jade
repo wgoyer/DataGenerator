@@ -3,9 +3,9 @@ html
 		title Iteration Generate
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+		script(src='js/jqIteration.js')	
 		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
 		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
-		script.
 		body
 			#iteration
 				form(method='post', action='/iteration')
@@ -16,7 +16,7 @@ html
 						tr
 							td Name:
 							td
-								input(type='text', name='iName')
+								input(type='text', id='iName', name='iName')
 						tr
 							td Start Date:
 							td
@@ -29,7 +29,7 @@ html
 							td State:
 							td
 								//-This select tool needs to be changed to pull the values from Rally.
-								select(name='iState')
+								select(id='iState', name='iState')
 									option(value='Planning')
 										value Planning
 									option(value='Committed')
@@ -37,7 +37,7 @@ html
 									option(value='Accepted')
 										value Accepted
 				#sbuttons(class='buttonDiv')
-					input(class='inp-buttons', id='createIteration', type='submit', value='Create')
+					input(class='inp-buttons', id='createIteration', type='button', value='Create')
 					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
 			#multiIteration(class='multiBox')
 				form(method='post', action='/multiIteration')
@@ -48,7 +48,7 @@ html
 						tr
 							td Name:
 							td
-								input(type='text', name='iName')
+								input(id='iMName', type='text', name='iName')
 						tr
 							td Start Date:
 							td
@@ -72,7 +72,7 @@ html
 							td
 								input(type='text', id='spinMe', name='iCount')
 				#mbuttons(class='buttonDiv')
-					input(class='inp-buttons', id='iCreate', type='submit', value='Create')
+					input(class='inp-buttons', type='button', id='iCreate', value='Create')
 					input(class='inp-buttons', type='button', id='rPlode', value='xPlode!')	
 
 
