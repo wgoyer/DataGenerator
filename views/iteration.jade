@@ -1,29 +1,11 @@
 html
 	head
 		title Iteration Generate
-
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
 		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
 		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
 		script.
-			$(function(){
-				$("#iteration").draggable();
-				$("#multiIteration").draggable();
-				$("#spinMe").spinner({min:2}).val(2);
-				$(".inp-buttons").button();
-				$(".dateField").datepicker();
-				$("#xPlode").click(function(){
-					$("#iteration").toggle("explode", function(){
-						$("#multiIteration").toggle("explode")
-					});
-				});
-				$("#rPlode").click(function(){
-					$("#multiIteration").toggle("explode", function(){
-						$("#iteration").toggle("explode")
-					});	
-				});
-			});
 		body
 			#iteration
 				form(method='post', action='/iteration')

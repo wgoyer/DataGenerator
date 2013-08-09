@@ -3,66 +3,9 @@ html
 		title Story Generate
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+		script(src='js/jqStory.js')
 		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
 		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
-		script.
-			$(function(){
-				function processCreate(multi){
-					console.log(multi);
-					var createUrl = "";
-					var jsStoryCount = "";
-					var jsStoryName = $("#sName").val();
-					var jsStoryState = $("#sState").val();
-					if(multi){
-						createUrl = "/multiStory"
-						jsStoryName = $("#sMName").val();
-						jsStoryState = $("#sMState").val();
-						jsStoryCount = $("#sCount").val();
-					} else {
-						createUrl = "/createStory"
-						jsStoryName = $("#sName").val();
-						jsStoryState = $("#sState").val();
-					}
-					var storyData = {
-						storyName: jsStoryName,
-						storyState: jsStoryState,
-						storyCount: jsStoryCount
-					};
-					console.log(storyData, createUrl);
-					$.ajax({
-						type: "POST",
-						url: createUrl,
-						dataType: "json",
-						data: storyData,
-						success: function(msg){
-							if(msg){
-								console.log(msg);
-							}
-						}
-					});
-				};
-				$("#createStory").click(function(){
-					processCreate(false);
-				});
-				$("#multiCreate").click(function(){
-					processCreate(true);
-				});
-				$("#story").draggable();
-				$("#createMulti")
-				$("#multiStory").draggable();
-				$("#sCount").spinner({min:2}).val(2);
-				$(".inp-buttons").button();
-				$("#xPlode").click(function(){
-					$("#story").toggle("explode", function(){
-						$("#multiStory").toggle("explode")
-					});
-				});
-				$("#rPlode").click(function(){
-					$("#multiStory").toggle("explode", function(){
-						$("#story").toggle("explode")
-					});	
-				});
-			});
 		body
 			#story
 				form(id='storyForm', method='post', action='/createStory')
@@ -71,7 +14,7 @@ html
 							td
 								h3 Story
 						tr
-							td Name:
+							td(id='nameTag') Name:
 							td
 								input(id='sName', type='text', name='storyName')
 						tr
@@ -82,7 +25,7 @@ html
 										option(value='#{indexState[i]}')
 											value #{indexState[i]}
 				#sbuttons(class='buttonDiv')
-					input(class='inp-buttons', id='createStory', value='Create')
+					input(class='inp-buttons', id='createStory', type='button', value='Create')
 					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
 			#multiStory(class='multiBox')
 				form(id='multiStoryForm', method='post', action='/multiStory')
@@ -91,7 +34,7 @@ html
 							td
 								h3 Stories
 						tr
-							td Name:
+							td(id='mNameTag') Name:
 							td
 								input(id='sMName',type='text', name='sName')
 						tr
