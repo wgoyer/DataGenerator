@@ -33,7 +33,7 @@ $(function(){
 		console.log(multi);
 		var createUrl, jsStoryCount, jsStoryName, jsStoryState;
 		if(multi){
-			createUrl = "/multiStory"
+			createUrl = "/multiStory";
 			jsStoryName = $("#sMName").val();
 			jsStoryState = $("#sMState").val();
 			jsStoryCount = $("#sCount").val();
