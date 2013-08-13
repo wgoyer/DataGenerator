@@ -53,13 +53,14 @@ $(function(){
 	});
 
 	function processCreate(multi){
-		var createUrl, jsIterationName, jsStartDate, jsEndDate;
+		var createUrl, jsIterationName, jsStartDate, jsEndDate, jsIterationCount;
 		if(multi){
 			createUrl = "/multiIteration";
 			jsIterationName = $(multiFields[0]).val();
 			jsStartDate = $(multiFields[1]).val();
 			jsEndDate = $(multiFields[2]).val();
 			jsState = $("#iMState").val();
+			jsIterationCount = $("#spinMe").val();
 		} else {
 			createUrl = "/iteration"
 			jsIterationName = $(singleFields[0]).val();
@@ -71,7 +72,8 @@ $(function(){
 			iterationName: jsIterationName,
 			iterationStartDate: jsStartDate,
 			iterationEndDate: jsEndDate,
-			iterationState: jsState
+			iterationState: jsState,
+			iterationCount: jsIterationCount
 		};
 		console.log(iterationData);
 		$.ajax({

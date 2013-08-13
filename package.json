@@ -1,0 +1,14 @@
+{
+	"name": "RallyDataGenerator",
+	"preferGlobal": false,
+	"version": "0.1.0",
+	"author": "Wayne",
+	"description": "Webapp using express to generate large quantities of Rally artifacts for testing purposes.",
+	"dependencies" : {
+		"express": "3.3.4",
+		"jade": "0.31.4",
+		"moment": "2.1.0",
+		"path": "0.4.9",
+		"request": "2.21.0"
+	}
+}
