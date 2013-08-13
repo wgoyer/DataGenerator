@@ -1,0 +1,15 @@
+.btn {
+	margin: 5px;
+}
+
+input[type="number"] {
+	height: 30px;
+}
+
+#iterationState {
+	margin-left: 20px;
+}
+
+.hidden {
+	display: none;
+}

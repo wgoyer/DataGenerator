@@ -4,3 +4,6 @@ public/stylesheets/ui-darkness
 public/Images
 node_modules
 .DS_Store
+.tm_properties
+tmtags
+tmtagsHistory

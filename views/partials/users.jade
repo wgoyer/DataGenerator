@@ -1,0 +1,29 @@
+form.form-horizontal(method='post', action='/createUser')
+	h3.page-header users
+	.control-group
+		label.control-label(for="userFirstName") First Name
+		.controls
+			input#userFirstName(type="text", placeholder="First Name", value="Joe")
+	.control-group
+		label.control-label(for="userLastName") Last Name
+		.controls
+			input#userLastName(type="text", placeholder="Last Name", value="Kawasaki")
+	.control-group
+		label.control-label(for="userName") Username
+		.controls
+			input#userName(type="text", placeholder="Username", value="JKaw")
+	.control-group
+		label.control-label(for="userEmail") Email Address
+		.controls
+			input#userEmail(type="text", placeholder="Email", value="JJKKaw@rizzlediz.com")
+	.control-group
+		label.control-label(for="userDisplayName") Display Name
+		.controls
+			input#userDisplayName(type="text", placeholder="Display Name", value="JoeK")
+	.control-group
+		label.control-label(for="userDisplayName") Amount
+		.controls
+			input#userAmount(type="number", value="1")
+	.control-group
+		.controls
+			input#userSubmit.btn(type="submit", value="Create")

@@ -1,0 +1,32 @@
+form.form-horizontal(method='post', action="/iteration")
+	h3.page-header iterations
+	.control-group
+		label.control-label(for="iterationName") Name
+		.controls
+			input(type="text", id="iterationName", placeholder="Name")
+	.control-group
+		label.control-label(for="iterationStartDate") Start Date
+		.controls
+			input#iterationStartDate(type="text", placeholder="Start Date", data-provide="datepicker")
+	.control-group
+		label.control-label(for="iterationEndDate") End Date
+		.controls
+			input#iterationEndDate(type="text", placeholder="End Date", data-provide="datepicker")
+	.control-group
+		label.control-label(for="iterationState") State
+		.controls
+				//-This select tool needs to be changed to pull the values from Rally.
+			select#iterationState
+				option(value='Planning')
+					value Planning
+				option(value='Committed')
+					value Committed
+				option(value='Accepted')
+					value Accepted
+	.control-group
+		label.control-label(for="iterationAmount") Amount
+		.controls
+			input#iterationAmount(type="number", value="1")
+	.control-group
+		.controls
+			button#iterationSubmit.btn Create

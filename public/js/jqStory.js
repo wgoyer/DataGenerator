@@ -18,7 +18,6 @@ $(function(){
 	$("#story").draggable();
 	$("#multiStory").draggable();
 	$("#sCount").spinner({min:2}).val(2);
-	$(".inp-buttons").button();
 	$("#xPlode").click(function(){
 		$("#story").toggle("explode", function(){
 			$("#multiStory").toggle("explode")
