@@ -9,7 +9,7 @@
     "jade": "~0.34.1",
 		"moment": "~2.1.0",
 		"path": "~0.4.9",
-		"request": "~2.6.0"
+		"request": "~2.26.0"
 	},
   "devDependencies": {
     "grunt": "~0.4.1",
