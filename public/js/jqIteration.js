@@ -43,12 +43,12 @@ $(function(){
 
 	$("#xPlode").click(function(){
 		$("#iteration").toggle("explode", function(){
-			$("#multiIteration").toggle("explode")
+			$("#multiIteration").toggle("explode");
 		});
 	});
 	$("#rPlode").click(function(){
 		$("#multiIteration").toggle("explode", function(){
-			$("#iteration").toggle("explode")
+			$("#iteration").toggle("explode");
 		});	
 	});
 

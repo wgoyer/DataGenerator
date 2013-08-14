@@ -9,12 +9,10 @@ exports.rend = function(req, res){
 }
 exports.createIteration = function(req, res){
 	var dateRange = [moment(req.body.iterationStartDate).format(), moment(req.body.iterationEndDate).format()];
-	console.log("this is the req.body "+req.body.iterationName);
 	sec.getSecurityToken(function(token){
 		generateIteration(req, token, null, dateRange, function(body){
 			var jsonBody = JSON.parse(body);
 			var generatedName = jsonBody.CreateResult.Object._refObjectName;
-			console.log(generatedName);
 			res.send(generatedName);
 		});	
 	});
@@ -34,7 +32,6 @@ exports.createManyIteration = function(req, res){
 			sec.getSecurityToken(function(token){
 				generateIteration(req,token,iterations,dateRange,function(body){
 					var jsonBody = JSON.parse(body);
-					console.log(jsonBody);
 					startDate.add('days', difference);
 					endDate.add('days', difference);
 					dateRange=[startDate.format(),endDate.format()];

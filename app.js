@@ -5,7 +5,8 @@ var express = require('express')
 , query = require('./routes/query.js')
 , users = require('./routes/users.js')
 , iteration = require('./routes/iteration.js')
-, stories = require('./routes/stories')
+, stories = require('./routes/stories.js')
+, test = require('./routes/test.js')
 , routes = require('./routes')
 
 var app = express();
@@ -23,6 +24,7 @@ app.get('/users', users.rend);
 app.get('/iteration', iteration.rend);
 app.get('/release', release.rend);
 app.get('/stories', query.getValues, stories.rend);
+app.get('/bootStrap', test.rend);
 
 app.post('/createUser', users.createUser);
 app.post('/multiStory', stories.createMultiStory);
@@ -35,6 +37,9 @@ app.post('/multiIteration', iteration.createManyIteration);
 app.post('/release', release.createRelease);
 app.post('/multiRelease', release.createManyRelease);
 
+app.get("*", function(req,res) {
+	res.send("Page not found.", 404);
+});
 
 app.listen(8080);
 console.log("Started on 8080");
