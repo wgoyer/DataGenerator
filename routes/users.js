@@ -3,39 +3,26 @@ var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
 var sec = require('./security.js');
 
-exports.rend = function(req,res){
-	res.render('users', {validationErrors:true});
-};
-exports.createUser = function (req, res){
-	validateCreateFields (req, res, function(validations){
-		console.log(validations);
-		if(validations===false) return;
-		sec.getSecurityToken(function(token){
-			generateUser(req, token, null, function(body){
-				console.log(body);
-				res.render('users', {validationErrors:true});
-			});
-		});
+exports.createUsers = function(req,res){	
+	res.send(200, {
+		msg: 'This is a message!',
+		errors: ['This is an error!', 'This is another error!']
 	});
-};
-exports.createManyUser = function(req,res){
+	
 	var numOfUsers = req.body.cCount;
 	validateCreateFields(req,res,function(validations){
 		if(validations===false) return;
 		createUserRecurse(numOfUsers);
 		function createUserRecurse(iterations){
-			if(iterations <= 0){
-				res.render('users', {validationErrors:true});
-				return;
-			} else {
-				sec.getSecurityToken(function(token){
-					generateUser(req,token,iterations,function(body){
-						console.log(body);
-						createUserRecurse(iterations-1);
-					});
+			sec.getSecurityToken(function(token){
+				generateUser(req,token,iterations,function(body){
+					console.log(body);
+					createUserRecurse(iterations-1);
 				});
-			};
+			});
 		};
+		console.log(req.body)
+
 	});
 };
 generateUser = function(req, token, count, callback){
@@ -52,13 +39,13 @@ generateUser = function(req, token, count, callback){
 				"UserName": count+req.body.cUser
 			}
 		});
-		request({
-			method: 'post',
-			uri: userURI,
-			body: myBody
-		}, function(error,response,body){
-			callback(body);
-		}).auth(rallyAuth[0], rallyAuth[1], false);
+		// request({
+		// 	method: 'post',
+		// 	uri: userURI,
+		// 	body: myBody
+		// }, function(error,response,body){
+		// 	callback(body);
+		// }).auth(rallyAuth[0], rallyAuth[1], false);
 }
 validateCreateFields =  function(req, res, callback){
 	var emailRegex = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
