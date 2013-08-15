@@ -26,10 +26,10 @@ app.get('/release', release.rend);
 app.get('/stories', query.getValues, stories.rend);
 app.get('/bootStrap', test.rend);
 
-app.post('/createUser', users.createUser);
+app.post('/createUsers', users.createUsers);
 app.post('/multiStory', stories.createMultiStory);
 app.post('/createStory', stories.createStory);
-app.post('/createManyUser', users.createManyUser);
+
 app.post('/defect', query.buildQuery, query.getValues, query.defect);
 app.post('/story', query.buildQuery, query.getValues, query.userStory);
 app.post('/iteration', iteration.createIteration);

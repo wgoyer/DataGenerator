@@ -9,7 +9,6 @@ $(function(){
 	$("#multiIteration").draggable();
 	$("#spinMe").spinner({min:2}).val(2);
 	$(".inp-buttons").button();
-	$(".dateField").datepicker();
 	$("#createIteration").click(function(){
 		for(i=0;i<=singleFieldLabels.length;i++){
 			if($(singleFields[i]).val()===""){
