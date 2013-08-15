@@ -5,10 +5,16 @@
 	"author": "Wayne",
 	"description": "Webapp using express to generate large quantities of Rally artifacts for testing purposes.",
 	"dependencies" : {
-		"express": "3.3.4",
-		"jade": "0.31.4",
-		"moment": "2.1.0",
-		"path": "0.4.9",
-		"request": "2.21.0"
-	}
+		"express": "~3.3.4",
+    "jade": "~0.34.1",
+		"moment": "~2.1.0",
+		"path": "~0.4.9",
+		"request": "~2.26.0"
+	},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-express-server": "~0.4.2",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-coffee": "~0.7.0"
+  }
 }

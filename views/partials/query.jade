@@ -1,0 +1,54 @@
+- var types = [ 'User Story', 'Defect' ]
+- var indexSeverity = [ 1, 2, 3, 4 ]
+- var indexPriority = [ 1, 2, 3, 4 ]
+- var indexState = [ 1, 2, 3, 4 ]
+- var output = { _refObjectName: 'Task' }
+
+form.form-horizontal(method='post')
+	h3.page-header query
+	
+	.control-group
+		label.control-label(for="queryType") Artifact Type
+		.controls
+				select#queryType
+					- for(i = 0; i < types.length; i++)
+						option(value='#{types[i]}')
+							value #{types[i]}
+
+	.userstoryfields
+		.control-group
+			label.control-label(for="userStoryName") Name
+			.controls
+				input(type="text", id="userStoryName", placeholder="Name")
+		.control-group
+			label.control-label(for="userStoryState") State
+			.controls
+				select(name='userStoryState')
+					- for(i = 0; i < indexState.length; i++)
+						option(value='#{indexState[i]}')
+							value #{indexState[i]}
+
+	.defectfields.hidden
+		.control-group
+			label.control-label(for="defectName") Name
+			.controls
+				input(type="text", id="defectName", placeholder="Name")
+		.control-group
+			label.control-label(for="defectPriority") Priority
+			.controls
+				select(name='defectPriority')
+					- for(i = 0; i < indexPriority.length; i++)
+						option(value='#{indexPriority[i]}')
+							value #{indexPriority[i]}
+		.control-group
+			label.control-label(for="defectSeverity") Severity
+			.controls
+				select(name='defectSeverity')
+					- for(i = 0; i < indexSeverity.length; i++)
+						option(value='#{indexSeverity[i]}')
+							value #{indexSeverity[i]}
+
+
+	.control-group
+		.controls
+			button#releaseSubmit.btn Create

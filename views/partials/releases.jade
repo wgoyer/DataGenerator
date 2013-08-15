@@ -1,0 +1,31 @@
+form.form-horizontal(method='post', action='/release')
+	h3.page-header releases
+	.control-group
+		label.control-label(for="releaseName") Name
+		.controls
+			input#releaseName(type="text", placeholder="Name")
+	.control-group
+		label.control-label(for="releaseStartDate") Start Date
+		.controls
+			input#releaseStartDate(type="text", placeholder="Start Date", data-provide="datepicker")
+	.control-group
+		label.control-label(for="releaseEndDate") End Date
+		.controls
+			input#releaseEndDate(type="text", placeholder="End Date", data-provide="datepicker")
+	.control-group
+		label.control-label(for="releaseState") Name
+		.controls
+			select(name='releaseState')
+				option(value='Planning')
+					value Planning
+				option(value='Committed')
+					value Committed
+				option(value='Accepted')
+					value Accepted
+	.control-group
+		label.control-label(for="releaseAmount") Amount
+		.controls
+			input#releaseAmount(type="number", value="1")
+	.control-group
+		.controls
+			button#releaseSubmit.btn Create

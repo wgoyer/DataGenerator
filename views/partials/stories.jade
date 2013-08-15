@@ -2,10 +2,8 @@ html
 	head
 		title Story Generate
 		script(src='http://code.jquery.com/jquery-2.0.0.min.js')
-		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
 		script(src='js/jqStory.js')
-		link(rel='stylesheet', href='stylesheets/custom-theme/jquery-ui-1.10.0.custom.min.css')
-		link(rel='stylesheet', href='stylesheets/mainStyle.css')	
+		link(rel='stylesheet', href='stylesheets/style.css')
 		body
 			#story
 				form(id='storyForm', method='post', action='/createStory')
@@ -25,8 +23,8 @@ html
 										option(value='#{indexState[i]}')
 											value #{indexState[i]}
 				#sbuttons(class='buttonDiv')
-					input(class='inp-buttons', id='createStory', type='button', value='Create')
-					input(class='inp-buttons', id='xPlode', type='button', value='xPlode!')
+					button#createStory.btn Create
+					button#.btn xPlode!
 			#multiStory(class='multiBox')
 				form(id='multiStoryForm', method='post', action='/multiStory')
 					table
@@ -49,8 +47,8 @@ html
 							td
 								input(type='text', id='sCount', class="spinner", name='sCount')
 				#mbuttons(class='buttonDiv')
-					input(class='inp-buttons', id='multiCreate', type='submit', value='Create')
-					input(class='inp-buttons', type='button', id='rPlode', value='xPlode!')	
+					input(id='multiCreate', type='submit', value='Create')
+					input(type='button', id='rPlode', value='xPlode!')	
 
 
 

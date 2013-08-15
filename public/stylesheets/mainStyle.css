@@ -1,12 +1,3 @@
-.buttonDiv{
-	position: absolute;
-	bottom: 5px;
-}
-.inp-buttons{
-	margin-left:5px;
-	margin-top:5px;
-	float: left;
-}
 .dateField{
 	text-align:center;
 	background-image: url("/Images/calendar.png");
@@ -15,72 +6,23 @@
 	padding-right: 18px;
 	width:100px;
 }
-.multiBox{
-	height: 355px;
-	width: 305px;
-	border: 2px black solid;
-	border-radius: 5px;
-	float: left;
-	background-color: lightblue;
-	display: none;
-}
-#story{
-	height:260px;
-	width:275px;
-	border:2px black solid;
-	border-radius:5px;
-	float:left;
-	background-color: lightblue;
-}
-#iteration{
-	height:260px;
-	width:275px;
-	border:2px black solid;
-	border-radius:5px;
-	float:left;
-	background-color: lightblue;
-}
-#myUser{
-	height: 270px;
-	width: 275px;
-	border: 2px black solid;
-	border-radius: 5px;
-	float: left;
-	background-color: lightblue;
-}
-#release{
-	height: 270px;
-	width: 275px;
-	border: 2px black solid;
-	border-radius: 5px;
-	float: left;
-	background-color: lightblue;
-}
-#myDefect{
-	height: 260px;
-	width: 275px;
-	border: 2px black solid;
-	border-radius: 5px;
-	float: left;
-	background-color: lightblue;
-}
-#myStory{
-	height: 260px;
-	width: 275px;
-	border: 2px black solid;
-	border-radius: 5px;
-	margin-left: 10px;
-	float: left;
-	background-color: lightblue;
-}
-#myResults{
-	height: 900px;
-	width: 800px;
-	border: 2px black solid;
-	border-radius: 5px;
-	float: left;
-	margin-top: 10px;
-}
+
 .spinner{
 	width: 50px;
+}
+
+.btn {
+	margin: 5px;
+}
+
+input[type="number"] {
+	height: 30px;
+}
+
+#iterationState {
+	margin-left: 20px;
+}
+
+.hidden {
+	display: none;
 }
