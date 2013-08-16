@@ -20,7 +20,7 @@ app.configure(function(){
 
 app.get('/', index.index);
 app.get('/query', query.getValues, query.rend);
-app.get('/users', users.rend);
+//app.get('/users', users.rend);
 app.get('/iteration', iteration.rend);
 app.get('/release', release.rend);
 app.get('/stories', query.getValues, stories.rend);
