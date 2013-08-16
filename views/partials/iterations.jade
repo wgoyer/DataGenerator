@@ -1,4 +1,4 @@
-form.form-horizontal(method='post', action="/iteration")
+form.form-horizontal
 	h3.page-header iterations
 	.control-group
 		label.control-label(for="iterationName") Name
@@ -15,8 +15,7 @@ form.form-horizontal(method='post', action="/iteration")
 	.control-group
 		label.control-label(for="iterationState") State
 		.controls
-				//-This select tool needs to be changed to pull the values from Rally.
-			select#iterationState
+			select(name='iterationState')
 				option(value='Planning')
 					value Planning
 				option(value='Committed')

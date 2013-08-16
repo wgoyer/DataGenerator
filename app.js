@@ -24,7 +24,6 @@ app.get('/query', query.getValues, query.rend);
 app.get('/iteration', iteration.rend);
 app.get('/release', release.rend);
 app.get('/stories', query.getValues, stories.rend);
-app.get('/bootStrap', test.rend);
 
 app.post('/createUsers', users.createUsers);
 app.post('/multiStory', stories.createMultiStory);
