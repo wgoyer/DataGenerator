@@ -9,11 +9,6 @@ Building / Running
 2.	cd DataGenerator
 3.	npm install
 4.	grunt server
-5.  Create ignore directory
-6.  Add the files: baseURI.js and rallyAuth.js to the ignore directory
-7.  baseURI template is:
-	var baseURI = 'https://<server>/slm/webservice/v2.0';
-	module.exports = baseURI;
-8.  rallyAuth template is:
-	var rallyAuth = ["<username@domain.123>", "<password>"];
-	module.exports = rallyAuth;
+5.  Create a file in this directory called credentials.js that looks like this:
+	exports.baseURI = '127.0.0.1:7001';
+	exports.credentials = [ 'ue@test.com', 'Password' ];

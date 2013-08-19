@@ -5,51 +5,6 @@ $(function(){
 	var multiFieldLabels = ["#mNameTag","#mStartDateTag","#mEndDateTag"];
 	var singleFields = ["#iName", "#iStartDate", "#iEndDate", "#iState"];
 	var multiFields = ["#iMName", "#iMStartDate", "#iMEndDate"];
-	$("#iteration").draggable();
-	$("#multiIteration").draggable();
-	$("#spinMe").spinner({min:2}).val(2);
-	$(".inp-buttons").button();
-	$("#createIteration").click(function(){
-		for(i=0;i<=singleFieldLabels.length;i++){
-			if($(singleFields[i]).val()===""){
-				validation = false;
-				$(singleFieldLabels[i]).css("color","red");
-			} else {
-				$(singleFieldLabels[i]).css("color","black");
-			}
-			console.log(i+1 + " :: "+ singleFields.length+ " "+ validation);
-			if(i+1 === singleFields.length && validation === true){
-				console.log('got to process create')
-				processCreate(false);
-			} else {
-				console.log("never made it");
-			}
-		}
-	});
-	$("#iCreate").click(function(){
-		for(i=0;i<=multiFieldLabels.length;i++){
-			if($(multiFields[i]).val()===""){
-				validation = false;
-				$(multiFieldLabels[i]).css("color","red");
-			} else {
-				$(multiFieldLabels[i]).css("color","black");
-			}
-			if(i === multiFields.length && validation === true){
-				processCreate(true);
-			}
-		}
-	});
-
-	$("#xPlode").click(function(){
-		$("#iteration").toggle("explode", function(){
-			$("#multiIteration").toggle("explode");
-		});
-	});
-	$("#rPlode").click(function(){
-		$("#multiIteration").toggle("explode", function(){
-			$("#iteration").toggle("explode");
-		});	
-	});
 
 	function processCreate(multi){
 		var createUrl, jsIterationName, jsStartDate, jsEndDate, jsIterationCount;
