@@ -11,6 +11,7 @@ exports.createUsers = function(req,res){
 				return;
 			}
 			sec.getSecurityToken(function(token){
+				console.log(token);
 				generateUser(req,token,iterations,function(body){
 					res.send({
 						msg: body
@@ -23,11 +24,12 @@ exports.createUsers = function(req,res){
 		console.log(req.body)
 };
 generateUser = function(req, token, count, callback){
-	console.log('in gneerate user');
+	console.log('in generate user');
 	if(typeof(count) != "number"){
 		count="";
 	}
 		var userURI = baseURI+"/user/create?key="+token;
+		console.log(userURI);
 		var myBody = JSON.stringify({
 			"User":{
 				"EmailAddress":req.body.userEmail,
