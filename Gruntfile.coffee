@@ -10,11 +10,17 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     coffee:
-      src:
+      public:
         expand: true
-        cwd: 'src/coffee'
+        cwd: 'src/public/coffee'
         src: ['*.coffee']
         dest: 'public/js'
+        ext: '.js'
+      server:
+        expand: true
+        cwd: 'src/server/coffee'
+        src: ['*.coffee']
+        dest: 'routes'
         ext: '.js'
     express:
       dev:
