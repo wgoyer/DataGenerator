@@ -23,13 +23,12 @@ app.get('/', index.index);
 app.post('/createUsers', users.createUsers);
 app.post('/multiStory', stories.createMultiStory);
 app.post('/createStory', stories.createStory);
+app.post('/iteration', iteration.createIteration);
+app.post('/release', release.createRelease);
+app.post('/multiRelease', release.createManyRelease);
 
 app.post('/defect', query.buildQuery, query.getValues, query.defect);
 app.post('/story', query.buildQuery, query.getValues, query.userStory);
-app.post('/iteration', iteration.createIteration);
-app.post('/multiIteration', iteration.createManyIteration);
-app.post('/release', release.createRelease);
-app.post('/multiRelease', release.createManyRelease);
 
 app.get("*", function(req,res) {
 	res.send("Page not found.", 404);

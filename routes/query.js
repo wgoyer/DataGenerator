@@ -1,6 +1,8 @@
 var request = require('request');
-var baseURI = require('../credentials.js').baseURI;
-var rallyAuth = require('../credentials').credentials;
+var baseURI = require('../ignore/baseURI');
+var rallyAuth = require('../ignore/rallyAuth');
+//var baseURI = require('../credentials.js').baseURI;
+//var rallyAuth = require('../credentials').credentials;
 
 exports.rend = function(req, res){
 	var results = "nothing";

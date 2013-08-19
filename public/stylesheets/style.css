@@ -1,10 +1,7 @@
-.dateField{
-	text-align:center;
+.datePicker{
 	background-image: url("/Images/calendar.png");
 	background-position: right center;
 	background-repeat: no-repeat;
-	padding-right: 18px;
-	width:100px;
 }
 
 .spinner{

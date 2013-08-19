@@ -1,28 +1,27 @@
 var request = require('request');
 var moment = require('moment');
-var baseURI = require('../credentials.js').baseURI;
-var rallyAuth = require('../credentials').credentials;
+var baseURI = require('../ignore/baseURI');
+var rallyAuth = require('../ignore/rallyAuth');
+//var baseURI = require('../credentials.js').baseURI;
+//var rallyAuth = require('../credentials').credentials;
 var sec = require('./security');
 
-exports.rend = function(req, res){
-	res.render('iteration');
-}
+//exports.createIteration = function(req, res){
+//	var dateRange = [moment(req.body.iterationStartDate).format(), moment(req.body.iterationEndDate).format()];
+//	sec.getSecurityToken(function(token){
+//		generateIteration(req, token, null, dateRange, function(body){
+//			var jsonBody = JSON.parse(body);
+//			var generatedName = jsonBody.CreateResult.Object._refObjectName;
+//			res.send(generatedName);
+//		});	
+//	});
+//}
 exports.createIteration = function(req, res){
-	var dateRange = [moment(req.body.iterationStartDate).format(), moment(req.body.iterationEndDate).format()];
-	sec.getSecurityToken(function(token){
-		generateIteration(req, token, null, dateRange, function(body){
-			var jsonBody = JSON.parse(body);
-			var generatedName = jsonBody.CreateResult.Object._refObjectName;
-			res.send(generatedName);
-		});	
-	});
-}
-exports.createManyIteration = function(req, res){
 	var startDate = new moment(req.body.iterationStartDate);
 	var endDate = new moment(req.body.iterationEndDate);
 	var dateRange=[startDate.format(),endDate.format()];
 	var difference = endDate.diff(startDate, 'days');
-	var numOfIterations = req.body.iterationCount;
+	var numOfIterations = req.body.iterationAmount;
 	createIterationRecurse(numOfIterations);
 	function createIterationRecurse(iterations){
 		if(iterations <= 0){
@@ -35,6 +34,7 @@ exports.createManyIteration = function(req, res){
 					startDate.add('days', difference);
 					endDate.add('days', difference);
 					dateRange=[startDate.format(),endDate.format()];
+					console.log(body);
 					createIterationRecurse(iterations-1);
 				});
 			});
@@ -45,6 +45,7 @@ generateIteration = function(req, token, count, dateRange, callback){
 	if(typeof(count) != "number"){
 		count="";
 	}
+	console.log(req.body);
 	var userURI = baseURI+"/iteration/create?key="+token;
 	var myBody = JSON.stringify({
 		"Iteration":{
