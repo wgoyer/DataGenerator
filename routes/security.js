@@ -1,5 +1,5 @@
-var baseURI = require('../ignore/baseURI');
-var rallyAuth = require('../ignore/rallyAuth');
+var baseURI = require('../credentials.js').baseURI;
+var rallyAuth = require('../credentials').credentials;
 var request = require('request');
 
 exports.getSecurityToken = function(callback){
