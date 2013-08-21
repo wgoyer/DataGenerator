@@ -6,8 +6,8 @@ html
 		script(src='js/lib/bootstrap.min.js')
 		script(src='js/lib/bootstrap-datepicker.js')
 		script(src='js/utils.js')
-		script(src='js/jqStory.js')
 		script(src='js/users.js')
+		script(src='js/iterations.js')
 		link(rel='stylesheet', href='stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='stylesheets/style.css')
 	body
@@ -26,9 +26,6 @@ html
 							a(href="#query", data-toggle='pill') Query
 						li
 							a(href="#stories", data-toggle='pill') Stories
-						li
-							a(href="/bootstrap") Bootstrap
-							
 					.tab-content
 						#users.tab-pane.active
 							include partials/users
@@ -40,8 +37,6 @@ html
 							include partials/query
 						#stories.tab-pane
 							include partials/stories
-						#bootstrap-example.tab-pane
-
 				.span6.well
 					.row
 						.span2
