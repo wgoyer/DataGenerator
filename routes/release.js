@@ -6,35 +6,21 @@ var rallyAuth = require('../ignore/rallyAuth');
 //var rallyAuth = require('../credentials').credentials;
 var sec = require('./security');
 
-exports.rend = function(req, res){
-	res.render('release');
-}
-
-//exports.createRelease = function(req, res){
-//	var dateRange = [moment(req.body.rStartDate).format(), moment(req.body.rEndDate).format()];
-//	sec.getSecurityToken(function(token){
-//		generateRelease(req, token, null, dateRange, function(body){
-//			console.log(body);
-//			res.render('release');
-//		});	
-//	});
-//}
-
 exports.createRelease = function(req, res){
 	var startDate = new moment(req.body.rStartDate);
 	var endDate = new moment(req.body.rEndDate);
-	var dateRange=[startDate.format(),endDate.format()];
+	var dateRange = [startDate.format(),endDate.format()];
 	var difference = endDate.diff(startDate, 'days');
-	var numOfIterations = req.body.rCount;
+	var numOfIterations = req.body.releaseAmount;
 	createIterationRecurse(numOfIterations);
 	function createIterationRecurse(iterations){
 		if(iterations <= 0){
-			res.render('release');
+			res.send('All done.');
 			return;
 		} else {
 			sec.getSecurityToken(function(token){
 				generateRelease(req,token,iterations,dateRange,function(body){
-					console.log(body);
+					var jsonBody = JSON.parse(body);
 					startDate.add('days', difference);
 					endDate.add('days', difference);
 					dateRange=[startDate.format(),endDate.format()];
@@ -54,8 +40,8 @@ generateRelease = function(req, token, count, dateRange, callback){
 		"Release":{
 			"ReleaseStartDate": dateRange[0],
 			"ReleaseDate": dateRange[1],
-			"State": req.body.rState,
-			"Name": count+req.body.rName
+			"State": req.body.releaseState,
+			"Name": count+req.body.releaseName
 		}
 	});
 	console.log(myBody);

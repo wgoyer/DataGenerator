@@ -27,8 +27,8 @@ app.post('/iteration', iteration.createIteration);
 app.post('/release', release.createRelease);
 //app.post('/multiRelease', release.createManyRelease);
 
-app.post('/defect', query.buildQuery, query.getValues, query.defect);
-app.post('/story', query.buildQuery, query.getValues, query.userStory);
+//app.post('/defect', query.buildQuery, query.getValues, query.defect);
+//app.post('/story', query.buildQuery, query.getValues, query.userStory);
 
 app.get("*", function(req,res) {
 	res.send("Page not found.", 404);
