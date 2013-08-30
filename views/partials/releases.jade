@@ -1,4 +1,4 @@
-form.form-horizontal(method='post', action='/release')
+form.form-horizontal
 	h3.page-header releases
 	.control-group
 		label.control-label(for="releaseName") Name
@@ -13,9 +13,9 @@ form.form-horizontal(method='post', action='/release')
 		.controls
 			input#releaseEndDate(type="text", placeholder="End Date", data-provide="datepicker")
 	.control-group
-		label.control-label(for="releaseState") Name
+		label.control-label(for="releaseState") State
 		.controls
-			select(name='releaseState')
+			select(id='rlsStateDropDown' ,name='releaseState')
 				option(value='Planning')
 					value Planning
 				option(value='Committed')

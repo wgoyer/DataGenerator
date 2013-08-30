@@ -6,7 +6,8 @@
       $('#users input').each(function(i, item) {
         return data[item.id] = item.value;
       });
-      $.ajax({
+      $.ajax;
+      ({
         url: '/createUsers',
         data: data
       });

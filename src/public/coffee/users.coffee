@@ -6,7 +6,7 @@ $ ->
       data[item.id] = item.value
     
     $.ajax
-      url: '/createUsers'
-      data: data
+  		url: '/createUsers'
+  		data: data
 
     e.preventDefault()

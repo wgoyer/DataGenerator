@@ -10,17 +10,17 @@ exports.rend = function(req, res){
 	res.render('release');
 }
 
-exports.createRelease = function(req, res){
-	var dateRange = [moment(req.body.rStartDate).format(), moment(req.body.rEndDate).format()];
-	sec.getSecurityToken(function(token){
-		generateRelease(req, token, null, dateRange, function(body){
-			console.log(body);
-			res.render('release');
-		});	
-	});
-}
+//exports.createRelease = function(req, res){
+//	var dateRange = [moment(req.body.rStartDate).format(), moment(req.body.rEndDate).format()];
+//	sec.getSecurityToken(function(token){
+//		generateRelease(req, token, null, dateRange, function(body){
+//			console.log(body);
+//			res.render('release');
+//		});	
+//	});
+//}
 
-exports.createManyRelease = function(req, res){
+exports.createRelease = function(req, res){
 	var startDate = new moment(req.body.rStartDate);
 	var endDate = new moment(req.body.rEndDate);
 	var dateRange=[startDate.format(),endDate.format()];

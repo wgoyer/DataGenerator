@@ -6,17 +6,8 @@ var rallyAuth = require('../ignore/rallyAuth');
 //var rallyAuth = require('../credentials').credentials;
 var sec = require('./security');
 
-//exports.createIteration = function(req, res){
-//	var dateRange = [moment(req.body.iterationStartDate).format(), moment(req.body.iterationEndDate).format()];
-//	sec.getSecurityToken(function(token){
-//		generateIteration(req, token, null, dateRange, function(body){
-//			var jsonBody = JSON.parse(body);
-//			var generatedName = jsonBody.CreateResult.Object._refObjectName;
-//			res.send(generatedName);
-//		});	
-//	});
-//}
 exports.createIteration = function(req, res){
+	console.log("In create Iteration");
 	var startDate = new moment(req.body.iterationStartDate);
 	var endDate = new moment(req.body.iterationEndDate);
 	var dateRange=[startDate.format(),endDate.format()];

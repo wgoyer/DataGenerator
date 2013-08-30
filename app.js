@@ -25,7 +25,7 @@ app.post('/multiStory', stories.createMultiStory);
 app.post('/createStory', stories.createStory);
 app.post('/iteration', iteration.createIteration);
 app.post('/release', release.createRelease);
-app.post('/multiRelease', release.createManyRelease);
+//app.post('/multiRelease', release.createManyRelease);
 
 app.post('/defect', query.buildQuery, query.getValues, query.defect);
 app.post('/story', query.buildQuery, query.getValues, query.userStory);
