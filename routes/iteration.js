@@ -21,11 +21,9 @@ exports.createIteration = function(req, res){
 		} else {
 			sec.getSecurityToken(function(token){
 				generateIteration(req,token,iterations,dateRange,function(body){
-					var jsonBody = JSON.parse(body);
 					startDate.add('days', difference);
 					endDate.add('days', difference);
 					dateRange=[startDate.format(),endDate.format()];
-					console.log(body);
 					createIterationRecurse(iterations-1);
 				});
 			});

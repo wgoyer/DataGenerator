@@ -20,7 +20,6 @@ exports.createRelease = function(req, res){
 		} else {
 			sec.getSecurityToken(function(token){
 				generateRelease(req,token,iterations,dateRange,function(body){
-					var jsonBody = JSON.parse(body);
 					startDate.add('days', difference);
 					endDate.add('days', difference);
 					dateRange=[startDate.format(),endDate.format()];

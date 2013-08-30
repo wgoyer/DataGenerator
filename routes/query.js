@@ -4,11 +4,6 @@ var rallyAuth = require('../ignore/rallyAuth');
 //var baseURI = require('../credentials.js').baseURI;
 //var rallyAuth = require('../credentials').credentials;
 
-exports.rend = function(req, res){
-	var results = "nothing";
-	res.render('query', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
-};
-
 exports.getValues = function(req, res, next){
 	getPriority(req, function(){
 		getSeverity(req, function(){
@@ -19,23 +14,6 @@ exports.getValues = function(req, res, next){
 	});
 };
 
-exports.userStory = function(req, res){
-	var URI = baseURI + req.queryString;
-	request(URI, function(error, response, body){
-		var parsedJSON = JSON.parse(body);
-		var results = parsedJSON.QueryResult.Results;
-		res.render('query', {output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
-	}).auth(rallyAuth[0], rallyAuth[1], false);
-};
-
-exports.defect = function(req, res){
-	var URI = baseURI + req.queryString;
-	request(URI, function(error, response, body){
-		var parsedjson = JSON.parse(body);
-		var results = parsedjson.QueryResult.Results;
-		res.render('query',{output: results, indexPriority: req.priority, indexSeverity: req.severity, indexState: req.storyState});
-	}).auth(rallyAuth[0], rallyAuth[1], false);
-};
 
 exports.buildQuery = function(req, res, next){
 	var values = extractValues(req);
