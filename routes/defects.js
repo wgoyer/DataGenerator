@@ -5,10 +5,10 @@ var rallyAuth = require('../ignore/rallyAuth');
 //var rallyAuth = require('../credentials').credentials;
 var sec = require('./security.js');
 
-exports.createStory = function(req, res){
+exports.createDefect = function(req, res){
 	var numOfStories = req.body.storyCount;
 	createStoriesRecurse(numOfStories);
-	function createStoriesRecurse(iterations){
+	function createDefectsRecurse(iterations){
 		if(iterations<=0){
 			return;
 		} else {
@@ -25,15 +25,16 @@ exports.createStory = function(req, res){
 	}
 };
 
-generateStory = function(req, token, count, callback){
+generateDefect = function(req, token, count, callback){
 	if(typeof(count) != "number"){
 		count="";
 	}
-	var userURI = baseURI+"/hierarchicalrequirement/create?key="+token;
+	var userURI = baseURI+"/defect/create?key="+token;
 	var myBody = JSON.stringify({
-		"Hierarchicalrequirement":{
-			"Name":count+req.body.storyName,
-			"ScheduleState":req.body.storyState
+		"Defect":{
+			"Name":count+req.body.defectName,
+			"Priority":req.body.defectState,
+			"Severity":req.body.defectSeverity
 		}
 	});
 	request({

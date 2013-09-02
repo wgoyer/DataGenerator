@@ -8,3 +8,5 @@ credentials.js
 .tm_properties
 tmtags
 tmtagsHistory
+public/js/lib/jquery-2.0.3.js
+public/js/lib/jquery-2.0.3.min.map

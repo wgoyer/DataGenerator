@@ -1,3 +1,7 @@
+var rally = require('../routes/rallyTools.js');
 exports.index = function(req, res){
-	res.render('index');
+	rally.getStoryState(req, function(){
+		console.log(req.storyState);
+		res.render('index', {indexState: req.storyState});
+	});
 };

@@ -1,11 +1,11 @@
-form.form-horizontal(method='post', action='/createStory')
-	h3.page-header stories
+form.form-horizontal(method='post', action='/createDefects')
+	h3.page-header defects
 	.control-group
-		label.control-label(for="storyName") User Story Name
+		label.control-label(for="storyName") Defect Name
 		.controls
-			input#storyName(type="text", placeholder="Story Name")
+			input#defectName(type="text", placeholder="Defect Name")
 	.control-group
-		label.control-label(for="storyState") Story State
+		label.control-label(for="storyState") Defect State
 		.controls
 			select#storyStateDropDown(name="storyStateDDL")
 				- for(i = 0; i < indexState.length; i++)

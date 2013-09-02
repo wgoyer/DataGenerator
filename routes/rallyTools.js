@@ -2,32 +2,32 @@ var request = require('request');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
 
-getPriority = function(req, callback){
+exports.getPriority = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-12513/AllowedValues";
 	genericApiCall(req, URI, function(apiResults){
 		req.priority = apiResults;
 		if (typeof callback === "function"){
-			callback();	
-		}	
-	});
-};
-
-getSeverity = function(req, callback){
-	var URI = baseURI+"/attributedefinition/-12509/AllowedValues";
-	genericApiCall(req, URI, function(apiResults){
-		req.severity = apiResults;
-		if (typeof callback === "function"){
-			callback();	
+			callback();
 		}
 	});
 };
 
-getStoryState = function(req, callback){
+exports.getSeverity = function(req, callback){
+	var URI = baseURI+"/attributedefinition/-12509/AllowedValues";
+	genericApiCall(req, URI, function(apiResults){
+		req.severity = apiResults;
+		if (typeof callback === "function"){
+			callback();
+		}
+	});
+};
+
+exports.getStoryState = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-27506/AllowedValues";
 	genericApiCall(req, URI, function(apiResults){
 		req.storyState = apiResults;
 		if (typeof callback === "function"){
-			callback();	
+			callback();
 		}
 	});
 };

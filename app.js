@@ -6,7 +6,7 @@ var express = require('express')
 , users = require('./routes/users.js')
 , iteration = require('./routes/iteration.js')
 , stories = require('./routes/stories.js')
-, test = require('./routes/test.js')
+, defects = require('./routes/defects.js')
 , routes = require('./routes')
 
 var app = express();
@@ -20,8 +20,8 @@ app.configure(function(){
 
 app.get('/', index.index);
 
+app.post('/createDefects', defects.createDefect);
 app.post('/createUsers', users.createUsers);
-app.post('/multiStory', stories.createMultiStory);
 app.post('/createStory', stories.createStory);
 app.post('/iteration', iteration.createIteration);
 app.post('/release', release.createRelease);
