@@ -1,20 +1,36 @@
 form.form-horizontal(method='post', action='/createDefects')
 	h3.page-header defects
 	.control-group
-		label.control-label(for="storyName") Defect Name
+		label.control-label(for="defectName") Defect Name
 		.controls
 			input#defectName(type="text", placeholder="Defect Name")
 	.control-group
-		label.control-label(for="storyState") Defect State
+		label.control-label(for="defectPrority") Defect Priority
 		.controls
-			select#storyStateDropDown(name="storyStateDDL")
-				- for(i = 0; i < indexState.length; i++)
-					console.log(indexState);
-					option(value='#{indexState[i]}')
-						value #{indexState[i]}
+			select#defectPriorityDropDown(name="defectPriorityDDL")
+				- for(i = 0; i < indexPriority.length; i++)
+					console.log(indexPriority);
+					option(value='#{indexPriority[i]}')
+						value #{indexPriority[i]}
 	.control-group
-		label.control-label(for="storyAmount") Amount of stories
+		label.control-label(for="defectSeverity") Defect Severity
 		.controls
-			input#storyAmount(type="number", value="1")
+			select#defectSeverityDropDown(name="defectSeverityDDL")
+				- for(i=0;i< indexSeverity.length; i++)
+					console.log(indexSeverity);
+					option(value='#{indexSeverity[i]}')
+						value #{indexSeverity[i]}
 	.control-group
-		input#userSubmit.btn(id='createStory', type='button', value='Create')
+		label.control-label(for="defectEnvironments") Defect Environments
+		.controls
+			select#defectEnvironments(name="defectEnvironmentsDDL")
+				- for(i=0;i<indexEnvironments.length;i++)
+					console.log(indexEnvironments);
+					option(value='#{indexEnvironments[i]}')
+						value #{indexEnvironments[i]}
+	.control-group
+		label.control-label(for="defectAmount") Amount of Defects
+		.controls
+			input#defectAmount(type="number", value="1")
+	.control-group
+		input#defectSubmit.btn(type='button', value='Create')

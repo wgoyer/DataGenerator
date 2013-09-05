@@ -32,6 +32,16 @@ exports.getStoryState = function(req, callback){
 	});
 };
 
+exports.getDefectEnvironments = function(req, callback){
+	var URI = baseURI+"/attributedefinition/-12511/AllowedValues";
+	genericApiCall(req, URI, function(apiResults){
+		req.defectEnvironments = apiResults;
+		if (typeof callback === "function"){
+			callback();
+		}
+	});
+};
+
 genericApiCall = function(req, URI, callback){
 	var apiResults = [];
 	request(URI, function(error,response,body){
