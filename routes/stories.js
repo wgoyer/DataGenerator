@@ -1,12 +1,10 @@
 var request = require('request');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
-//var baseURI = require('../credentials.js').baseURI;
-//var rallyAuth = require('../credentials').credentials;
 var sec = require('./security.js');
 
 exports.createStory = function(req, res){
-	var numOfStories = req.body.storyCount;
+	var numOfStories = req.body.storyAmount;
 	createStoriesRecurse(numOfStories);
 	function createStoriesRecurse(iterations){
 		if(iterations<=0){
