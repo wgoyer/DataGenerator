@@ -32,7 +32,11 @@ generateUser = function(req, token, count, callback){
 				"FirstName":req.body.userFirstName,
 				"LastName":req.body.userLastName,
 				"DisplayName":req.body.userDisplayName,
-				"UserName": count+req.body.userName
+				"UserName": count+req.body.userName,
+				//Comment TeamMemberships out after use 
+				"TeamMemberships" : {
+					"ObjectID": "93185572"
+				}
 			}
 		});
 	    request({
