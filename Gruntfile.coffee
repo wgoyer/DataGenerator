@@ -31,7 +31,7 @@ module.exports = (grunt) ->
         files: 'src/**/*.coffee'
         tasks: 'coffee'
       express:
-        files: [ 'routes/*.js', 'public/js/*.js', 'views/**/*.jade', 'routes/*.js' ]
+        files: [ 'Gruntfile.coffee', 'routes/*.js', 'public/js/*.js', 'views/**/*.jade', 'routes/*.js', 'ignore/*.js' ]
         tasks: [ 'express:dev' ]
         options:
           nospawn: true

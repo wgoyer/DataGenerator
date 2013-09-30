@@ -1,10 +1,14 @@
 (function() {
+  console.log("Test");
+
   $(function() {
     return $('#iterationSubmit').on('click', function(e) {
       var data;
       data = {};
-      data.iterationState = $('#itStateDropDown').val();
       $('#iterations input').each(function(i, item) {
+        return data[item.id] = item.value;
+      });
+      $('#iterations select').each(function(i, item) {
         return data[item.id] = item.value;
       });
       $.ajax({

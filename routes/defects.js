@@ -8,9 +8,6 @@ exports.createDefect = function(req, res){
 	createDefectRecurse(numOfDefects);
 	function createDefectRecurse(iterations){
 		if(iterations<=0){
-			res.send({
-				msg: "All done."
-			});
 			return;
 		} else {
 			sec.getSecurityToken(function(token){

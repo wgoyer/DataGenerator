@@ -3,9 +3,14 @@ $ ->
   $.ajaxSetup
     type: 'post'
     dataType: 'json'
-    success: (res = '') ->
-      $('#status').html """
-        <p class="text-info">#{res.msg}</p>
-        #{('<p class="text-error">' + error + '</p>' for error in res.errors).join ''}
-      """
-    
+    success: (res = {msg: '', Errors: []}) ->
+
+      result = res.CreateResult
+
+      status = ''
+
+      status += "<p class=\"text-info\">#{result.msg}</p>" if result.msg?
+
+      status += ('<p class="text-error">' + error + '</p>' for error in result.Errors).join '' if result.Errors?
+
+      $('#status').html status
