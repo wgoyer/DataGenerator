@@ -5,7 +5,6 @@ var rallyAuth = require('../ignore/rallyAuth');
 var sec = require('./security');
 
 exports.createIteration = function(req, res){
-	console.log("In create Iteration");
 	var startDate = new moment(req.body.iterationStartDate);
 	var endDate = new moment(req.body.iterationEndDate);
 	var dateRange=[startDate.format(),endDate.format()];
