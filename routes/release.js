@@ -2,8 +2,6 @@ var request = require('request');
 var moment = require('moment');
 var baseURI = require('../ignore/baseURI');
 var rallyAuth = require('../ignore/rallyAuth');
-//var baseURI = require('../credentials.js').baseURI;
-//var rallyAuth = require('../credentials').credentials;
 var sec = require('./security');
 
 exports.createRelease = function(req, res){
@@ -15,7 +13,9 @@ exports.createRelease = function(req, res){
 	createIterationRecurse(numOfIterations);
 	function createIterationRecurse(iterations){
 		if(iterations <= 0){
-			res.send('All done.');
+			res.send({
+				msg: "All done."
+			});
 			return;
 		} else {
 			sec.getSecurityToken(function(token){

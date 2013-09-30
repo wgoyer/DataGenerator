@@ -13,7 +13,9 @@ exports.createIteration = function(req, res){
 	createIterationRecurse(numOfIterations);
 	function createIterationRecurse(iterations){
 		if(iterations <= 0){
-			res.send("All done.");
+			res.send({
+				msg: "All done."
+			});
 			return;
 		} else {
 			sec.getSecurityToken(function(token){
