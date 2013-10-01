@@ -5,13 +5,12 @@ $ ->
 
     data = {}
     $('#users input').each (i, item) ->
-      data[item.id] = item.value
+      data[item.getAttribute('data-field-name')] = item.value
 
     $.ajax
       url: '/createUsers'
       data: data
       success: (results) ->
-        
         status = ''
 
         for result in results
@@ -24,6 +23,6 @@ $ ->
             
           status += '<hr>'
 
-        $('#status').html status
+        $('#status').html status.replace /<hr>$/, ''
 
     e.preventDefault()

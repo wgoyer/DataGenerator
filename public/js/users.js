@@ -5,7 +5,7 @@
       $('#status').html('Loading...');
       data = {};
       $('#users input').each(function(i, item) {
-        return data[item.id] = item.value;
+        return data[item.getAttribute('data-field-name')] = item.value;
       });
       $.ajax({
         url: '/createUsers',
@@ -35,7 +35,7 @@
             }
             status += '<hr>';
           }
-          return $('#status').html(status);
+          return $('#status').html(status.replace(/<hr>$/, ''));
         }
       });
       return e.preventDefault();

@@ -10,7 +10,7 @@
     "moment": "~2.1.0",
     "path": "~0.4.9",
     "request": "~2.21.0",
-    "underscore": "~1.5.2"
+    "q": "~0.9.7"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

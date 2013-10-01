@@ -3,7 +3,7 @@ request = require 'request'
 http = require 'http'
 
 module.exports = (grunt) ->
-  
+
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-express-server'
@@ -34,6 +34,6 @@ module.exports = (grunt) ->
         files: [ 'Gruntfile.coffee', 'routes/*.js', 'public/js/*.js', 'views/**/*.jade', 'routes/*.js', 'ignore/*.js' ]
         tasks: [ 'express:dev' ]
         options:
-          nospawn: true
+          spawn: false
 
-  grunt.registerTask 'server', [ 'express:dev', 'watch' ]
+  grunt.registerTask 'dev', [ 'express:dev', 'watch:express' ]
