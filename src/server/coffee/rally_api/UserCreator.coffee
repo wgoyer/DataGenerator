@@ -1,5 +1,3 @@
-credentials = require('../credentials')
-
 Q = require 'q'
 ObjectCreator = require './ObjectCreator'
 
@@ -17,16 +15,3 @@ module.exports = class UserCreator extends ObjectCreator
       data.UserName = data.UserName.replace /^([^@]+)/, '$1' + i
 
     data
-
-  toJSON: (i) ->    
-    data = @transformData i
-    JSON.stringify User: data
-
-  sendRequests: ->
-    requests = for i in [1..@count]
-      @wsapi.request
-        body: @toJSON i
-
-    Q.all(requests).then (results) =>
-      @response.send (result.CreateResult for result in results)
-    , (err) -> console.log 'error on requests', err
