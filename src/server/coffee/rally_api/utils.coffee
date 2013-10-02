@@ -40,6 +40,41 @@ class WsapiRequester
         sendImmediately: false
       qrequest opt
 
+
+getPriority = ->
+  uri = baseURI + '/attributedefinition/-12513/AllowedValues'
+  genericApiCall(uri)
+
+getSeverity = ->
+  uri = baseURI + '/attributedefinition/-12509/AllowedValues'
+  genericApiCall(uri)
+  
+getStoryState = ->
+  uri = baseURI + '/attributedefinition/-27506/AllowedValues'
+  genericApiCall(uri)
+  
+getDefectEnvironments = ->
+  uri = baseURI + '/attributedefinition/-12511/AllowedValues'
+  genericApiCall(uri)
+
+genericApiCall = (uri) ->
+  console.log 'doing genericApiCall', uri, credentials
+  qrequest(
+    uri: uri
+    json: true
+    auth:
+      user: credentials.username
+      pass: credentials.password
+      sendImmediately: false
+  )
+    
+  
+
+
 module.exports =
   qrequest: qrequest
   WsapiRequester: WsapiRequester
+  getPriority: getPriority
+  getSeverity: getSeverity
+  getStoryState: getStoryState
+  getDefectEnvironments : getDefectEnvironments

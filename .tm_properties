@@ -1,1 +1,2 @@
+projectDirectory = "$CWD"
 excludeInFolderSearch = "{$excludeInFolderSearch,public/{js,css}/lib}"

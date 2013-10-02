@@ -3,6 +3,7 @@ node_modules
 
 credentials.js
 rally_api/
+routes/
 
 tmtags
 tmtagsHistory
