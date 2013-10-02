@@ -3,27 +3,27 @@ form.form-horizontal
 	.control-group
 		label.control-label(for="userFirstName") First Name
 		.controls
-			input(type="text", data-field-name="FirstName", placeholder="First Name", value="Joe")
+			input#userFirstName(type="text", data-field-name="FirstName", placeholder="First Name", value="Joe")
 	.control-group
 		label.control-label(for="userLastName") Last Name
 		.controls
-			input(type="text", data-field-name="LastName", placeholder="Last Name", value="Smith")
+			input#userLastName(type="text", data-field-name="LastName", placeholder="Last Name", value="Smith")
 	.control-group
 		label.control-label(for="userName") Username
 		.controls
-			input(type="text", data-field-name="UserName", placeholder="Username", value="Joe@rallydev.com")
+			input#userName(type="text", data-field-name="UserName", placeholder="Username", value="Joe@rallydev.com")
 	.control-group
 		label.control-label(for="userEmail") Email Address
 		.controls
-			input(type="text", data-field-name="EmailAddress", placeholder="Email", value="Joe@rallydev.com")
+			input#userEmail(type="text", data-field-name="EmailAddress", placeholder="Email", value="Joe@rallydev.com")
 	.control-group
 		label.control-label(for="userDisplayName") Display Name
 		.controls
-			input(type="text", data-field-name="DisplayName", placeholder="Display Name", value="Joe@rallydev.com")
+			input#userDisplayName(type="text", data-field-name="DisplayName", placeholder="Display Name", value="Joe@rallydev.com")
 	.control-group
 		label.control-label(for="userDisplayName") Amount
 		.controls
-			input(type="number", data-field-name="count", min="1", max="100", value="1")
+			input#userAmount(type="number", data-field-name="count", min="1", max="100", value="1")
 	.control-group
 		.controls
 			button#userSubmit.btn Create
