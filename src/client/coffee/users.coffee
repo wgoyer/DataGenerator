@@ -7,22 +7,22 @@ $ ->
     $('#users input').each (i, item) ->
       data[item.getAttribute('data-field-name')] = item.value
 
-    $.ajax
+    $.ajax(
       url: '/createUsers'
       data: data
-      success: (results) ->
-        status = ''
+    ).then (results) ->
+      status = ''
 
-        for result in results
+      for result in results
+        
+        status += "<p class=\"text-info\">#{result.msg}</p>" if result.msg?  
+        
+        status += '<p class="text-success">Created user: ' + result.Object.EmailAddress + '</p>'  if result.Object?
+
+        status += ('<p class="text-error">' + error + '</p>' for error in result.Errors).join '' if result.Errors?
           
-          status += "<p class=\"text-info\">#{result.msg}</p>" if result.msg?  
-          
-          status += '<p class="text-success">Created user: ' + result.Object.EmailAddress + '</p>'  if result.Object?
+        status += '<hr>'
 
-          status += ('<p class="text-error">' + error + '</p>' for error in result.Errors).join '' if result.Errors?
-            
-          status += '<hr>'
-
-        $('#status').html status.replace /<hr>$/, ''
+      $('#status').html status.replace /<hr>$/, ''
 
     e.preventDefault()

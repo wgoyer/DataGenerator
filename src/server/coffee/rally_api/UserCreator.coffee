@@ -9,7 +9,7 @@ module.exports = class UserCreator extends ObjectCreator
 
   transformData: (i) ->
     data = super()
-    
+
     if @count > 1
       data.EmailAddress = data.EmailAddress.replace /^([^@]+)/, '$1' + i
       data.UserName = data.UserName.replace /^([^@]+)/, '$1' + i

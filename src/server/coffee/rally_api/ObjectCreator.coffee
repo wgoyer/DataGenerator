@@ -3,11 +3,17 @@ WsapiRequester = require('./utils').WsapiRequester
 
 # Base class to persist WSAPI objects
 module.exports = class ObjectCreator
-    
+
+  # Specify which fields to send on the object
+  fields: []
+
+  # Specify the relative uri
+  uri: ''
+
   constructor: (@data, @response) ->
     @count = @data.count
     @wsapi = new WsapiRequester @uri
-  
+
   transformData: ->
     data = {}
 
@@ -16,7 +22,7 @@ module.exports = class ObjectCreator
 
     data
 
-  toJSON: (i) ->    
+  toJSON: (i) ->
     data = @transformData i
     JSON.stringify User: data
 
