@@ -1,7 +1,4 @@
 var request = require('request');
-var baseURI = require('../ignore/baseURI');
-var rallyAuth = require('../ignore/rallyAuth');
-var sec = require('./security');
 
 exports.createDefect = function(req, res){
 	var numOfDefects = req.body.defectAmount;
@@ -44,5 +41,5 @@ generateDefect = function(req, token, count, callback){
 		body: myBody
 	}, function(error,response,body){
 		callback(body);
-	}).auth(rallyAuth[0], rallyAuth[1], false);
+	})
 };

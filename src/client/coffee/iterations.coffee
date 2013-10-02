@@ -1,4 +1,3 @@
-console.log "Test"
 $ ->
   $('#iterationSubmit').on 'click', (e) ->
 

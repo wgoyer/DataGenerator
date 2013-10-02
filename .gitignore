@@ -1,12 +1,12 @@
-ignore/
-credentials.js
-
 .DS_Store
 node_modules
+
+credentials.js
 
 .tm_properties
 tmtags
 tmtagsHistory
+goatporn
 
 .idea
 *.iml

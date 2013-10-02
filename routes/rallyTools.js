@@ -1,6 +1,7 @@
 var request = require('request');
-var baseURI = require('../ignore/baseURI');
-var rallyAuth = require('../ignore/rallyAuth');
+
+var baseURI = require('../credentials').baseURI;
+var credentials = require('../credentials').credentials;
 
 exports.getPriority = function(req, callback){
 	var URI = baseURI+"/attributedefinition/-12513/AllowedValues";
@@ -43,13 +44,13 @@ exports.getDefectEnvironments = function(req, callback){
 };
 
 genericApiCall = function(req, URI, callback){
-	var apiResults = [];
-	request(URI, function(error,response,body){
-		var parsedjson = JSON.parse(body);
-		var jsonPayload = parsedjson.QueryResult.Results;
-		for(i=0;i<jsonPayload.length;i++){
-			apiResults.push(jsonPayload[i].StringValue);
-		}
-		callback(apiResults);
-	}).auth(rallyAuth[0], rallyAuth[1], false);
+  var apiResults = [];
+  request(URI, function(error,response,body){
+    var parsedjson = JSON.parse(body);
+    var jsonPayload = parsedjson.QueryResult.Results;
+    for(i=0;i<jsonPayload.length;i++){
+      apiResults.push(jsonPayload[i].StringValue);
+    }
+    callback(apiResults);
+  }).auth(credentials.username, credentials.password, false);
 };

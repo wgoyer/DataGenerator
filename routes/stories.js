@@ -1,7 +1,4 @@
 var request = require('request');
-var baseURI = require('../ignore/baseURI');
-var rallyAuth = require('../ignore/rallyAuth');
-var sec = require('./security.js');
 
 exports.createStory = function(req, res){
 	var numOfStories = req.body.storyAmount;
@@ -34,11 +31,11 @@ generateStory = function(req, token, count, callback){
 			"ScheduleState":req.body.storyState
 		}
 	});
-	request({
-		method: 'post',
-		uri: userURI,
-		body: myBody
-	}, function(error,response,body){
-		callback(body);
-	}).auth(rallyAuth[0], rallyAuth[1], false);
+  // request({
+  //   method: 'post',
+  //   uri: userURI,
+  //   body: myBody
+  // }, function(error,response,body){
+  //   callback(body);
+  // }).auth(null, null, false);
 };

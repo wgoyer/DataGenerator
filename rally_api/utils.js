@@ -1,13 +1,11 @@
 (function() {
-  var Q, WsapiRequester, baseURI, qrequest, rallyAuth, request;
+  var Q, WsapiRequester, baseURI, credentials, qrequest, request, _ref;
 
   Q = require('q');
 
   request = require('request');
 
-  baseURI = require('../ignore/baseURI');
-
-  rallyAuth = require('../ignore/rallyAuth');
+  _ref = require('../credentials'), credentials = _ref.credentials, baseURI = _ref.baseURI;
 
   qrequest = function(opt) {
     var deferred;
@@ -34,13 +32,13 @@
         uri: baseURI + '/security/authorize',
         json: true,
         auth: {
-          user: rallyAuth[0],
-          pass: rallyAuth[1],
+          user: credentials.username,
+          pass: credentials.password,
           sendImmediately: false
         }
       }).then(function(data) {
-        var _ref;
-        if (((_ref = data.OperationResult) != null ? _ref.SecurityToken : void 0) == null) {
+        var _ref1;
+        if (((_ref1 = data.OperationResult) != null ? _ref1.SecurityToken : void 0) == null) {
           deferred.reject('Error getting security token');
         }
         return deferred.resolve(data.OperationResult.SecurityToken);
@@ -53,10 +51,10 @@
       return Q.when(this.token, function(token) {
         opt.method = 'post';
         opt.json = true;
-        opt.uri = "" + _this.uri + "?key=" + token;
+        opt.uri = "" + baseURI + _this.uri + "?key=" + token;
         opt.auth = {
-          user: rallyAuth[0],
-          pass: rallyAuth[1],
+          user: credentials.username,
+          pass: credentials.password,
           sendImmediately: false
         };
         return qrequest(opt);

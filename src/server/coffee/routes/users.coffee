@@ -1,4 +1,4 @@
-UserCreator = require './UserCreator'
+UserCreator = require '../rally_api/UserCreator'
 
 exports.createUsers = (req, response) ->
 

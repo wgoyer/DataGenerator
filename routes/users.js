@@ -1,7 +1,7 @@
 (function() {
   var UserCreator;
 
-  UserCreator = require('./UserCreator');
+  UserCreator = require('../rally_api/UserCreator');
 
   exports.createUsers = function(req, response) {
     var userCreator;

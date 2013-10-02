@@ -1,4 +1,4 @@
-baseURI = require '../ignore/baseURI'
+credentials = require('../credentials')
 
 Q = require 'q'
 ObjectCreator = require './ObjectCreator'
@@ -7,7 +7,7 @@ ObjectCreator = require './ObjectCreator'
 module.exports = class UserCreator extends ObjectCreator
 
   fields: ["EmailAddress", "FirstName", "LastName", "DisplayName", "UserName"]
-  uri: baseURI + '/user/create'
+  uri: '/user/create'
 
   transformData: (i) ->
     data = super()

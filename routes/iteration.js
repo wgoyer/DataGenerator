@@ -1,8 +1,5 @@
 var request = require('request');
 var moment = require('moment');
-var baseURI = require('../ignore/baseURI');
-var rallyAuth = require('../ignore/rallyAuth');
-var sec = require('./security');
 
 exports.createIteration = function(req, res){
 	var startDate = new moment(req.body.iterationStartDate);
@@ -44,11 +41,11 @@ generateIteration = function(req, token, count, dateRange, callback){
 		}
 	});
 	console.log(myBody);
-	request({
-		method: 'post',
-		uri: userURI,
-		body: myBody
-	}, function(error,response,body){
-		callback(body);
-	}).auth(rallyAuth[0], rallyAuth[1], false);
+  // request({
+  //   method: 'post',
+  //   uri: userURI,
+  //   body: myBody
+  // }, function(error,response,body){
+  //   callback(body);
+  // }).auth(null, null, false);
 };

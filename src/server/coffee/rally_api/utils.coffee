@@ -1,8 +1,7 @@
 Q = require 'q'
 request = require 'request'
 
-baseURI = require '../ignore/baseURI'
-rallyAuth = require '../ignore/rallyAuth'
+{credentials, baseURI} = require '../credentials'
 
 qrequest = (opt) ->
   deferred = Q.defer()
@@ -22,8 +21,8 @@ class WsapiRequester
       uri: baseURI + '/security/authorize'
       json: true
       auth:
-        user: rallyAuth[0]
-        pass: rallyAuth[1]
+        user: credentials.username
+        pass: credentials.password
         sendImmediately: false
     ).then (data) ->
       unless data.OperationResult?.SecurityToken? then deferred.reject 'Error getting security token'
@@ -34,10 +33,10 @@ class WsapiRequester
     Q.when @token, (token) =>
       opt.method = 'post'
       opt.json = true
-      opt.uri = "#{@uri}?key=#{token}"
+      opt.uri = "#{baseURI}#{@uri}?key=#{token}"
       opt.auth =
-        user: rallyAuth[0]
-        pass: rallyAuth[1]
+        user: credentials.username
+        pass: credentials.password
         sendImmediately: false
       qrequest opt
 

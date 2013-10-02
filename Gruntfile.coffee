@@ -10,18 +10,18 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     coffee:
-      public:
+      client:
         expand: true
-        cwd: 'src/public/coffee'
+        cwd: 'src/client/coffee'
         src: ['*.coffee']
         dest: 'public/js'
         ext: '.js'
       server:
         expand: true
         cwd: 'src/server/coffee'
-        src: ['*.coffee']
-        dest: 'routes'
+        src: ['**/*.coffee']
         ext: '.js'
+
     express:
       dev:
         options:
@@ -31,7 +31,14 @@ module.exports = (grunt) ->
         files: 'src/**/*.coffee'
         tasks: 'coffee'
       express:
-        files: [ 'Gruntfile.coffee', 'routes/*.js', 'public/js/*.js', 'views/**/*.jade', 'routes/*.js', 'ignore/*.js' ]
+        files: [
+          'Gruntfile.coffee'
+          'credentials.js'
+          'routes/*.js'
+          'rally_api/*.js'
+          'public/js/*.js'
+          'views/**/*.jade'
+        ]
         tasks: [ 'express:dev' ]
         options:
           spawn: false

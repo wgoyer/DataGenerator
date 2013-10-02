@@ -1,6 +1,4 @@
 (function() {
-  console.log("Test");
-
   $(function() {
     return $('#iterationSubmit').on('click', function(e) {
       var data;
