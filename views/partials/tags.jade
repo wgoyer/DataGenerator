@@ -1,0 +1,13 @@
+form.form-horizontal(method='post', action='/defect')
+  h3.page-header defects
+  .control-group
+    label.control-label(for="tagName") Tag Name
+    .controls
+      input#tagName(type="text", placeholder="Tag Name", data-field-name='Name')
+  .control-group
+    label.control-label(for="tagCount") Count
+    .controls
+      input#tagCount(type="number", value="1", data-field-name="count")
+  .control-group
+    .controls
+      button#tagSubmit.btn Create
