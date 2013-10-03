@@ -1,20 +1,21 @@
-form.form-horizontal(method='post', action='/createStory')
-	h3.page-header stories
-	.control-group
-		label.control-label(for="storyName") User Story Name
-		.controls
-			input#storyName(type="text", placeholder="Story Name")
-	.control-group
-		label.control-label(for="storyState") Story State
-		.controls
-			select#storyStateDropDown(name="storyStateDDL")
-				- for(i = 0; i < indexState.length; i++)
-					console.log(indexState);
-					option(value='#{indexState[i]}')
-						value #{indexState[i]}
-	.control-group
-		label.control-label(for="storyAmount") Amount of stories
-		.controls
-			input#storyAmount(type="number", value="1")
-	.control-group
-		input#userSubmit.btn(id='createStory', type='button', value='Create')
+form.form-horizontal(method='post', action='/story')
+  h3.page-header stories
+  .control-group
+    label.control-label(for="storyName") User Story Name
+    .controls
+      input#storyName(type="text", placeholder="Story Name", data-field-name='Name')
+  .control-group
+    label.control-label(for="storyState") Story State
+    .controls
+      select#storyStateDropDown(name="storyStateDDL", data-field-name='ScheduleState')
+        - for(i = 0; i < indexState.length; i++)
+          console.log(indexState);
+          option(value='#{indexState[i]}')
+            value #{indexState[i]}
+  .control-group
+    label.control-label(for="storyAmount") Amount of stories
+    .controls
+      input#storyAmount(type="number", value="1", data-field-name='count')
+  .control-group
+    .controls
+      button#storySubmit.btn Create

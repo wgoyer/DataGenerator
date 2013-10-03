@@ -3,19 +3,19 @@ form.form-horizontal
 	.control-group
 		label.control-label(for="releaseName") Name
 		.controls
-			input#releaseName(type="text", placeholder="Name")
+			input#releaseName(type="text", placeholder="Name", data-field-name='Name')
 	.control-group
-		label.control-label(for="releaseStartDate") Start Date
+		label.control-label(for="releaseStartDate") Release Start Date
 		.controls
-			input#releaseStartDate(type="text", placeholder="Start Date", data-provide="datepicker")
+			input#releaseStartDate(type="text", placeholder="Start Date", data-provide="datepicker", data-field-name='ReleaseStartDate')
 	.control-group
-		label.control-label(for="releaseEndDate") End Date
+		label.control-label(for="releaseEndDate") Release Date
 		.controls
-			input#releaseEndDate(type="text", placeholder="End Date", data-provide="datepicker")
+			input#releaseEndDate(type="text", placeholder="End Date", data-provide="datepicker", data-field-name='ReleaseDate')
 	.control-group
 		label.control-label(for="releaseState") State
 		.controls
-			select(id='rlsStateDropDown' ,name='releaseState')
+			select(id='rlsStateDropDown', name='releaseState', data-field-name='State')
 				option(value='Planning')
 					value Planning
 				option(value='Committed')
@@ -25,7 +25,7 @@ form.form-horizontal
 	.control-group
 		label.control-label(for="releaseAmount") Amount
 		.controls
-			input#releaseAmount(type="number", value="1")
+			input#releaseAmount(type="number", value="1", data-field-name="count")
 	.control-group
 		.controls
 			button#releaseSubmit.btn Create

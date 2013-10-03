@@ -8,7 +8,7 @@ $ ->
       data[item.getAttribute('data-field-name')] = item.value
 
     $.ajax(
-      url: '/createUsers'
+      url: '/user'
       data: data
     ).then (results) ->
       status = ''

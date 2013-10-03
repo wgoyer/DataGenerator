@@ -8,7 +8,7 @@
         return data[item.getAttribute('data-field-name')] = item.value;
       });
       $.ajax({
-        url: '/createUsers',
+        url: '/user',
         data: data
       }).then(function(results) {
         var error, result, status, _i, _len;

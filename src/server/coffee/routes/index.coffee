@@ -10,7 +10,15 @@ exports.index = (req, res) ->
   ]
     
   Q.all(values).then (results) ->
-    console.log results
     
-    res.render('index')
-  
+    results = for result in results
+      for value in result.QueryResult.Results
+        value.StringValue
+
+    dropdowns =
+      indexState: results[0]
+      indexPriority: results[1]
+      indexSeverity: results[2]
+      indexEnvironments: results[3]
+    
+    res.render 'index', dropdowns

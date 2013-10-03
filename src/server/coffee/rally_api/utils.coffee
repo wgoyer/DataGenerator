@@ -31,9 +31,9 @@ class WsapiRequester
 
   request: (opt) ->
     Q.when @token, (token) =>
-      opt.method = 'post'
+      opt.method ?= 'post'
       opt.json = true
-      opt.uri = "#{baseURI}#{@uri}?key=#{token}"
+      opt.uri ?= "#{baseURI}#{@uri}?key=#{token}"
       opt.auth =
         user: credentials.username
         pass: credentials.password
@@ -58,22 +58,18 @@ getDefectEnvironments = ->
   genericApiCall(uri)
 
 genericApiCall = (uri) ->
-  console.log 'doing genericApiCall', uri, credentials
-  qrequest(
+  qrequest
     uri: uri
     json: true
     auth:
       user: credentials.username
       pass: credentials.password
       sendImmediately: false
-  )
-    
-  
-
 
 module.exports =
   qrequest: qrequest
   WsapiRequester: WsapiRequester
+  #RallyURL: new RallyURL
   getPriority: getPriority
   getSeverity: getSeverity
   getStoryState: getStoryState

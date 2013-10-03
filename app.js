@@ -6,27 +6,33 @@ var express = require('express')
 , iteration = require('./routes/iteration.js')
 , stories = require('./routes/stories.js')
 , defects = require('./routes/defects.js')
+, tags = require('./routes/tags.js')
+, project = require('./routes/project.js')
 , routes = require('./routes')
 
 var app = express();
 
 app.configure(function(){
-	app.set('views', __dirname+'/views');
-	app.set('view engine', 'jade');
-	app.use(express.bodyParser());
-	app.use(express.static('public'));
+  app.set('views', __dirname+'/views');
+  app.set('view engine', 'jade');
+  app.use(express.bodyParser());
+  app.use(express.static('public'));
 });
 
 app.get('/', index.index);
 
-app.post('/createDefects', defects.createDefect);
-app.post('/createUsers', users.createUsers);
-app.post('/createStory', stories.createStory);
+app.get('/project', project.read);
+app.get('/users', users.read);
+
+app.post('/defect', defects.createDefects);
+app.post('/user', users.createUsers);
+app.post('/story', stories.createStories);
 app.post('/iteration', iteration.createIteration);
 app.post('/release', release.createRelease);
+app.post('/tag', tags.createTags);
 
 app.get("*", function(req,res) {
-	res.send("Page not found.", 404);
+  res.send("Page not found.", 404);
 });
 
 app.listen(8080);

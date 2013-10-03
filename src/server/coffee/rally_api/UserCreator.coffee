@@ -1,4 +1,3 @@
-Q = require 'q'
 ObjectCreator = require './ObjectCreator'
 
 # WSAPI Users Class

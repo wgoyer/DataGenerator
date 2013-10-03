@@ -1,36 +1,39 @@
-form.form-horizontal(method='post', action='/createDefects')
-	h3.page-header defects
-	.control-group
-		label.control-label(for="defectName") Defect Name
-		.controls
-			input#defectName(type="text", placeholder="Defect Name")
-	.control-group
-		label.control-label(for="defectPrority") Defect Priority
-		.controls
-			select#defectPriorityDropDown(name="defectPriorityDDL")
-				- for(i = 0; i < indexPriority.length; i++)
-					console.log(indexPriority);
-					option(value='#{indexPriority[i]}')
-						value #{indexPriority[i]}
-	.control-group
-		label.control-label(for="defectSeverity") Defect Severity
-		.controls
-			select#defectSeverityDropDown(name="defectSeverityDDL")
-				- for(i=0;i< indexSeverity.length; i++)
-					console.log(indexSeverity);
-					option(value='#{indexSeverity[i]}')
-						value #{indexSeverity[i]}
-	.control-group
-		label.control-label(for="defectEnvironments") Defect Environments
-		.controls
-			select#defectEnvironments(name="defectEnvironmentsDDL")
-				- for(i=0;i<indexEnvironments.length;i++)
-					console.log(indexEnvironments);
-					option(value='#{indexEnvironments[i]}')
-						value #{indexEnvironments[i]}
-	.control-group
-		label.control-label(for="defectAmount") Amount of Defects
-		.controls
-			input#defectAmount(type="number", value="1")
-	.control-group
-		input#defectSubmit.btn(type='button', value='Create')
+form.form-horizontal(method='post', action='/defect')
+  h3.page-header defects
+  .control-group
+    label.control-label(for="defectName") Defect Name
+    .controls
+      input#defectName(type="text", placeholder="Defect Name", data-field-name='Name')
+  .control-group
+    label.control-label(for="defectPrority") Defect Priority
+    .controls
+      select#defectPriorityDropDown(name="defectPriorityDDL", data-field-name='Priority')
+        - for(i = 0; i < indexPriority.length; i++)
+          option(value='#{indexPriority[i]}')
+            value #{indexPriority[i]}
+  .control-group
+    label.control-label(for="defectSeverity") Defect Severity
+    .controls
+      select#defectSeverityDropDown(name="defectSeverityDDL", data-field-name='Severity')
+        - for(i=0;i< indexSeverity.length; i++)
+          option(value='#{indexSeverity[i]}')
+            value #{indexSeverity[i]}
+  .control-group
+    label.control-label(for="defectEnvironments") Defect Environments
+    .controls
+      select#defectEnvironments(name="defectEnvironmentsDDL", data-field-name='Environment')
+        - console.log(indexEnvironments)
+        - for(i=0;i<indexEnvironments.length;i++)
+          option(value='#{indexEnvironments[i]}')
+            value #{indexEnvironments[i]}
+  .control-group
+    label.control-label(for="defectRelease") Release
+    .controls
+      select#defectRelease(data-field-name='Release', data-dropdown="release")
+  .control-group
+    label.control-label(for="defectAmount") Amount of Defects
+    .controls
+      input#defectAmount(type="number", value="1", data-field-name="count")
+  .control-group
+    .controls
+      input#defectSubmit.btn(type='button', value='Create')

@@ -1,2 +1,3 @@
 projectDirectory = "$CWD"
-excludeInFolderSearch = "{$excludeInFolderSearch,public/{js,css}/lib}"
+
+excludeInFolderSearch = "{$excludeInFolderSearch,public/js,public/{js,css}/lib,routes,rally_api}"

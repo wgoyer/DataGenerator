@@ -3,19 +3,19 @@ form.form-horizontal
 	.control-group
 		label.control-label(for="iterationName") Name
 		.controls
-			input(type="text", id="iterationName", placeholder="Name")
+			input#iterationName(type="text", data-field-name="Name", placeholder="Name", value="October - November")
 	.control-group
 		label.control-label(for="iterationStartDate") Start Date
 		.controls
-			input#iterationStartDate.datePicker(type="text", placeholder="Start Date", data-provide="datepicker")
+			input#iterationStartDate.datePicker(type="text", data-field-name="StartDate", placeholder="Start Date", data-provide="datepicker", value="10/02/2013")
 	.control-group
 		label.control-label(for="iterationEndDate") End Date
 		.controls
-			input#iterationEndDate.datePicker(type="text", placeholder="End Date", data-provide="datepicker")
+			input#iterationEndDate.datePicker(type="text", data-field-name="EndDate", placeholder="End Date", data-provide="datepicker", value="11/30/2013")
 	.control-group
 		label.control-label(for="iterationState") State
 		.controls
-			select(id='itStateDropDown', name='iterationState')
+			select(id='itStateDropDown', data-field-name="State", name='iterationState')
 				option(value='Planning')
 					value Planning
 				option(value='Committed')
@@ -25,7 +25,7 @@ form.form-horizontal
 	.control-group
 		label.control-label(for="iterationAmount") Amount
 		.controls
-			input#iterationAmount(type="number", value="1")
+			input#iterationAmount(type="number", data-field-name="count", value="1")
 	.control-group
 		.controls
 			button#iterationSubmit.btn Create

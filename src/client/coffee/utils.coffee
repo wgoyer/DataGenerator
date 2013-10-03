@@ -1,16 +1,31 @@
 # init code
+
+@DataGenerator = {}
+
+getOidFromRef = (ref) -> ref.match(/\d+$/)?[0]
+
 $ ->
   $.ajaxSetup
     type: 'post'
     dataType: 'json'
-    # success: (res = {msg: '', Errors: []}) ->
-    # 
-    #   result = res.CreateResult
-    # 
-    #   status = ''
-    # 
-    #   status += "<p class=\"text-info\">#{result.msg}</p>" if result.msg?
-    # 
-    #   status += ('<p class="text-error">' + error + '</p>' for error in result.Errors).join '' if result.Errors?
-    # 
-    #   $('#status').html status
+
+  # load user -> user profile -> get default project
+  $.ajax(
+    type: 'get'
+    url: '/users'
+  ).then (res) ->
+    window.DataGenerator.currentUser = res
+    $('.current').html """
+<p>Current user: #{res.User.EmailAddress}</p>
+<p>Current project: #{res.UserProfile.DefaultProject._refObjectName}</p>
+    """
+    
+  # load release dropdowns
+  $.ajax(
+    type: 'get'
+    url: 'http://127.0.0.1:7001/slm/webservice/v2.0/release'
+    xhrFields:
+      withCredentials: true
+  ).then (results) ->
+    debugger
+    console.log 'loading releases'
