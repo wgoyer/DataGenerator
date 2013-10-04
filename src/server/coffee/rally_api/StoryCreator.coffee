@@ -3,7 +3,7 @@ ObjectCreator = require './ObjectCreator'
 # WSAPI Users Class
 module.exports = class StoryCreator extends ObjectCreator
 
-  fields: ["Name", "ScheduleState"]
+  fields: ["Name", "ScheduleState", "Release", "Iteration"]
   uri: '/hierarchicalrequirement/create'
 
   transformData: (i) ->

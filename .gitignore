@@ -4,6 +4,8 @@ node_modules
 credentials.js
 /rally_api/
 /routes/
+/public/js
+!/public/js/lib
 
 tmtags
 tmtagsHistory
@@ -11,3 +13,4 @@ goatporn
 
 .idea
 *.iml
+*.map

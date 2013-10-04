@@ -25,6 +25,8 @@ module.exports = (grunt) ->
         cwd: 'src/server/coffee'
         src: ['**/*.coffee']
         ext: '.js'
+      options:
+        sourceMap: true
     express:
       dev:
         options:

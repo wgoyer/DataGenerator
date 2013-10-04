@@ -3,15 +3,19 @@ form.form-horizontal(method='post', action='/story')
   .control-group
     label.control-label(for="storyName") User Story Name
     .controls
-      input#storyName(type="text", placeholder="Story Name", data-field-name='Name')
+      input#storyName(type="text", placeholder="Story Name", data-field-name='Name', value="a story")
   .control-group
     label.control-label(for="storyState") Story State
     .controls
-      select#storyStateDropDown(name="storyStateDDL", data-field-name='ScheduleState')
-        - for(i = 0; i < indexState.length; i++)
-          console.log(indexState);
-          option(value='#{indexState[i]}')
-            value #{indexState[i]}
+      select#storyState(data-field-name='ScheduleState')
+  .control-group
+    label.control-label(for="storyRelease") Release
+    .controls
+      select#storyRelease(data-field-name='Release')
+  .control-group
+    label.control-label(for="storyIteration") Iteration
+    .controls
+      select#storyIteration(data-field-name='Iteration')
   .control-group
     label.control-label(for="storyAmount") Amount of stories
     .controls

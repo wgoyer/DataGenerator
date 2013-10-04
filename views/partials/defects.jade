@@ -3,37 +3,31 @@ form.form-horizontal(method='post', action='/defect')
   .control-group
     label.control-label(for="defectName") Defect Name
     .controls
-      input#defectName(type="text", placeholder="Defect Name", data-field-name='Name')
+      input#defectName(type="text", placeholder="Defect Name", data-field-name='Name', value="a defect")
   .control-group
     label.control-label(for="defectPrority") Defect Priority
     .controls
-      select#defectPriorityDropDown(name="defectPriorityDDL", data-field-name='Priority')
-        - for(i = 0; i < indexPriority.length; i++)
-          option(value='#{indexPriority[i]}')
-            value #{indexPriority[i]}
+      select#defectPriority(data-field-name='Priority')
   .control-group
     label.control-label(for="defectSeverity") Defect Severity
     .controls
-      select#defectSeverityDropDown(name="defectSeverityDDL", data-field-name='Severity')
-        - for(i=0;i< indexSeverity.length; i++)
-          option(value='#{indexSeverity[i]}')
-            value #{indexSeverity[i]}
+      select#defectSeverity(data-field-name='Severity')
   .control-group
     label.control-label(for="defectEnvironments") Defect Environments
     .controls
-      select#defectEnvironments(name="defectEnvironmentsDDL", data-field-name='Environment')
-        - console.log(indexEnvironments)
-        - for(i=0;i<indexEnvironments.length;i++)
-          option(value='#{indexEnvironments[i]}')
-            value #{indexEnvironments[i]}
+      select#defectEnvironments(data-field-name='Environment')
   .control-group
     label.control-label(for="defectRelease") Release
     .controls
-      select#defectRelease(data-field-name='Release', data-dropdown="release")
+      select#defectRelease(data-field-name='Release')
+  .control-group
+    label.control-label(for="defectIteration") Iteration
+    .controls
+      select#defectIteration(data-field-name='Iteration')
   .control-group
     label.control-label(for="defectAmount") Amount of Defects
     .controls
       input#defectAmount(type="number", value="1", data-field-name="count")
   .control-group
     .controls
-      input#defectSubmit.btn(type='button', value='Create')
+      button#defectSubmit.btn Create
