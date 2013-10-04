@@ -16,7 +16,7 @@ module.exports = class IterationCreator extends ObjectCreator
     @startDate = new moment @data.iterationStartDate
     @difference = endDate.diff startDate, 'days'
 
-  fields: ["Name", "StartDate", "EndDate", "State"]
+  fields: ["Name", "StartDate", "EndDate", "State", "Theme"]
   uri: '/iteration/create'
 
   transformData: (i) ->

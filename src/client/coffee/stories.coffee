@@ -7,6 +7,11 @@ $ ->
     data = {}
     $('#stories input, #stories select').each (i, item) ->
       data[item.getAttribute('data-field-name')] = item.value
+      
+    if $('#stories .jacksonize').is(':checked')
+      jackson = jacksonize()
+      data.Name = jackson.title
+      data.Description = jackson.description
 
     $.ajax(
       url: '/story'

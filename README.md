@@ -26,3 +26,4 @@ To Do
 2.  Fix status so that response posts a linked formatted ID to the status DIV
 3.  Investigate whether https://github.com/skeeto/fantasyname might work for us
 4.  Use http://jqueryui.com/autocomplete/
+5.  Look at this: http://www.icndb.com/api/

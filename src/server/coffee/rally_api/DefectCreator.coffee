@@ -3,7 +3,7 @@ ObjectCreator = require './ObjectCreator'
 # WSAPI Users Class
 module.exports = class DefectCreator extends ObjectCreator
 
-  fields: ["Name", "Priority", "Severity", "Environment", "Release", "Iteration"]
+  fields: ["Name", "Priority", "Severity", "Environment", "Release", "Iteration", "Description"]
   uri: '/defect/create'
 
   transformData: (i) ->

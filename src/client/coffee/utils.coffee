@@ -14,6 +14,9 @@ wsBaseURI = 'http://127.0.0.1:7001/slm/webservice/v2.0'
 @getCurrentProjectOid = ->
   getOidFromRef DataGenerator.currentUser.UserProfile.DefaultProject._ref
 
+@getCurrentWorkspaceOid = ->
+  getOidFromRef DataGenerator.currentUser.UserProfile.DefaultWorkspace._ref
+
 loadObjectDropdown = (url, dropdownSelector) ->
   # load release dropdowns
   $.ajax(

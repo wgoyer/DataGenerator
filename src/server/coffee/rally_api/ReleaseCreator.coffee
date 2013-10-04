@@ -16,7 +16,7 @@ module.exports = class ReleaseCreator extends ObjectCreator
     # @startDate = new moment @data.iterationStartDate
     @difference = releaseDate.diff releaseStartDate, 'days'
 
-  fields: ["Name", "ReleaseStartDate", "ReleaseDate", "State"]
+  fields: ["Name", "ReleaseStartDate", "ReleaseDate", "State", "Theme"]
   uri: '/release/create'
 
   transformData: (i) ->

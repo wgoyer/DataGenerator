@@ -8,6 +8,11 @@ $ ->
       if item.value
         data[item.getAttribute('data-field-name')] = item.value
 
+      if $('#defects .jacksonize').is(':checked')
+        jackson = jacksonize()
+        data.Name = jackson.title
+        data.Description = jackson.description
+
     $.ajax(
       url: '/defect'
       data: data

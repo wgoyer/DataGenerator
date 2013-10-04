@@ -1,31 +1,33 @@
 form.form-horizontal
-	h3.page-header iterations
-	.control-group
-		label.control-label(for="iterationName") Name
-		.controls
-			input#iterationName(type="text", data-field-name="Name", placeholder="Name", value="October - November")
-	.control-group
-		label.control-label(for="iterationStartDate") Start Date
-		.controls
-			input#iterationStartDate.datePicker(type="text", data-field-name="StartDate", placeholder="Start Date", data-provide="datepicker", value="10/02/2013")
-	.control-group
-		label.control-label(for="iterationEndDate") End Date
-		.controls
-			input#iterationEndDate.datePicker(type="text", data-field-name="EndDate", placeholder="End Date", data-provide="datepicker", value="11/30/2013")
-	.control-group
-		label.control-label(for="iterationState") State
-		.controls
-			select(id='itStateDropDown', data-field-name="State", name='iterationState')
-				option(value='Planning')
-					value Planning
-				option(value='Committed')
-					value Committed
-				option(value='Accepted')
-					value Accepted
-	.control-group
-		label.control-label(for="iterationAmount") Amount
-		.controls
-			input#iterationAmount(type="number", data-field-name="count", value="1")
-	.control-group
-		.controls
-			button#iterationSubmit.btn Create
+  h3.page-header iterations
+  .control-group
+    label.control-label(for="iterationName") Name
+    .controls
+      input#iterationName(type="text", data-field-name="Name", placeholder="Name", value="October - November")
+  .control-group
+    label.control-label(for="iterationStartDate") Start Date
+    .controls
+      input#iterationStartDate.datePicker(type="text", data-field-name="StartDate", placeholder="Start Date", data-provide="datepicker", value="10/02/2013")
+  .control-group
+    label.control-label(for="iterationEndDate") End Date
+    .controls
+      input#iterationEndDate.datePicker(type="text", data-field-name="EndDate", placeholder="End Date", data-provide="datepicker", value="11/30/2013")
+  .control-group
+    label.control-label(for="iterationState") State
+    .controls
+      select(id='itStateDropDown', data-field-name="State", name='iterationState')
+        option(value='Planning')
+          value Planning
+        option(value='Committed')
+          value Committed
+        option(value='Accepted')
+          value Accepted
+  .control-group
+    label.control-label(for="iterationAmount") Amount
+    .controls
+       input#iterationCount(type="number", min="1", data-field-name="count", value="1")
+  .control-group
+    .controls
+      label.checkbox Samuel L. Jacksonize!
+        input.jacksonize(type="checkbox")
+      button#iterationSubmit.btn Create
