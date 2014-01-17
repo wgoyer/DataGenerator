@@ -5,11 +5,12 @@ DataGenerator
 Building / Running
 ------------------
 
-1.	git clone https://github.com/wgoyer/DataGenerator.git
-2.	cd DataGenerator
-3.	npm install
+1.  `git clone https://github.com/wgoyer/DataGenerator.git`
+2.  `cd DataGenerator`
+3.  `npm install`
 4.  Enter your credentials and baseURI in credentials.js
-5.  node app.js
+5.  `grunt coffee`
+6.  `node app.js`
 
 To Do
 =============
