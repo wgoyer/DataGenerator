@@ -11,6 +11,9 @@ Building / Running
 4.  Enter your credentials and baseURI in credentials.js
 5.  `grunt coffee`
 6.  `node app.js`
+7.  `open http://localhost:8080`
+
+Note: You must have a default project set in Rally or there will be errors and you will not create anything.  This will be fixed.
 
 To Do
 =============
