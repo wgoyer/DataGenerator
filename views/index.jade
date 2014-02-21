@@ -5,7 +5,7 @@ html
     script(src='js/lib/bacon.min.js')
     script(src='js/lib/bootstrap.min.js')
     script(src='js/lib/bootstrap-datepicker.js')
-    script(src='js/lib/slipsum.js')
+    //- script(src='js/lib/slipsum.js')
     script(src='js/utils.js')
     script(src='js/users.js')
     script(src='js/iterations.js')
@@ -20,9 +20,14 @@ html
     .container-fluid
       .row-fluid
         .span3.well
-          h3 current data
+          h3 user / project
           .current
-      
+            .current-user
+            br
+            .control-group
+              .controls
+              select.current-project
+
         .span5.well
           ul.nav.nav-pills
             li.active
@@ -36,6 +41,8 @@ html
             li
               a(href="#stories", data-toggle='pill') Stories
             li
+              a(href="#tasks", data-toggle='pill') Tasks
+            li
               a(href="#tags", data-toggle='pill') Tags
           .tab-content
             #users.tab-pane.active
@@ -48,8 +55,10 @@ html
               include partials/defects
             #stories.tab-pane
               include partials/stories
+            #tasks.tab-pane
+              include partials/tasks
             #tags.tab-pane
               include partials/tags
         .span4.well
-          h3 status 
-          p#status 
+          h3 status
+          p#status

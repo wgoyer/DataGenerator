@@ -1,0 +1,19 @@
+form.form-horizontal(method='post', action='/task')
+  h3.page-header tasks
+  .control-group
+    label.control-label(for="taskName") Name
+    .controls
+      input#taskName(type="text", placeholder="Tag Name", data-field-name='Name', value="a_task")
+  .control-group
+    label.control-label(for="defectSeverity") Parent
+    .controls
+      select#taskParent(data-field-name='Parent')
+  .control-group
+    label.control-label(for="taskCount") Count
+    .controls
+      input#taskCount(type="number", value="1", min="1", data-field-name="count")
+  .control-group
+    .controls
+      label.checkbox Samuel L. Jacksonize!
+        input.jacksonize(type="checkbox")
+      button#taskSubmit.btn Create

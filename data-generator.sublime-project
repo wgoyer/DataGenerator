@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/pairing/projects/DataGenerator",
+			"folder_exclude_patterns": [".git", "node_modules", "public/js"],
+		}
+	]
+}

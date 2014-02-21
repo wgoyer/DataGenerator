@@ -14,3 +14,5 @@ goatporn
 .idea
 *.iml
 *.map
+
+data-generator.sublime-workspace
