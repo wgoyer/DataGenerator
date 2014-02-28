@@ -13,6 +13,7 @@ html
     script(src='js/defects.js')
     script(src='js/stories.js')
     script(src='js/tags.js')
+    script(src='js/tasks.js')
     link(rel='stylesheet', href='stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='stylesheets/style.css')
   body
@@ -20,13 +21,14 @@ html
     .container-fluid
       .row-fluid
         .span3.well
-          h3 user / project
+          h3 context
           .current
             .current-user
             br
             .control-group
               .controls
-              select.current-project
+                select.current-workspace
+                select.current-project
 
         .span5.well
           ul.nav.nav-pills

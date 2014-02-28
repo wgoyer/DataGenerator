@@ -1,9 +1,10 @@
+Q = require 'q'
 ObjectCreator = require './ObjectCreator'
 
 # WSAPI Users Class
-module.exports = class StoryCreator extends ObjectCreator
+module.exports = class TaskCreator extends ObjectCreator
 
-  fields: ["Name", "Parent"]
+  fields: ["Name", "WorkProduct"]
   uri: '/task/create'
 
   transformData: (i) ->

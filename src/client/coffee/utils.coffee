@@ -12,10 +12,10 @@ wsBaseURI = 'http://127.0.0.1:7001/slm/webservice/v2.0'
   "#{baseURI}/#/#{projectOid}/detail/#{type}/#{oid}"
 
 @getCurrentProjectOid = ->
-  getOidFromRef DataGenerator.currentUser.UserProfile.DefaultProject._ref
+  getOidFromRef DataGenerator.currentProjectOid
 
 @getCurrentWorkspaceOid = ->
-  getOidFromRef DataGenerator.currentUser.UserProfile.DefaultWorkspace._ref
+  getOidFromRef DataGenerator.currentWorkspaceOid
 
 createObjectDropdown = (results, includeNoEntry = true) ->
   html = if includeNoEntry then '<option value="">No Entry</option>' else ''
@@ -25,7 +25,7 @@ createObjectDropdown = (results, includeNoEntry = true) ->
 
   html
 
-loadObjectDropdown = (url, dropdownSelector) ->
+loadObjectDropdown = (url, dropdownSelector, includeNoEntry) ->
   # load release dropdowns
   $.ajax(
     type: 'get'
@@ -33,7 +33,7 @@ loadObjectDropdown = (url, dropdownSelector) ->
     xhrFields:
       withCredentials: true
   ).then (results) ->
-    $(dropdownSelector).html createObjectDropdown results.QueryResult.Results
+    $(dropdownSelector).html createObjectDropdown results.QueryResult.Results, includeNoEntry
 
 loadRallyDropdown = (url, dropdownSelector) ->
   # load release dropdowns
@@ -60,36 +60,47 @@ loadProjectScopedDropdowns = (projectName) ->
 
   loadObjectDropdown """#{wsBaseURI}/iteration?query=(project.Name = "#{projectName}")""", '#storyIteration'
 
-  loadObjectDropdown """#{wsBaseURI}/hierarchicalrequirement?query=(project.Name = "#{projectName}")""", '#taskParent'
+  loadObjectDropdown """#{wsBaseURI}/hierarchicalrequirement?query=(project.Name = "#{projectName}")""", '#taskParent', false
 
 $ ->
   $.ajaxSetup
     type: 'post'
     dataType: 'json'
 
-  userPromise = $.ajax
+  workspacePromise = $.ajax
     type: 'get'
-    url: '/users'
+    url: "/workspace"
 
-  projectPromise = $.ajax
-    type: 'get'
-    url: '/project'
+  workspacePromise.then (workspace) ->
 
-  $.when(userPromise, projectPromise).then (user, project) ->
+    $('.current-workspace').html createObjectDropdown workspace.QueryResult.Results, false
+    DataGenerator.currentWorkspaceOid = $('.current-workspace option:selected').val()
 
-    $('.current-user').html user[0].User.EmailAddress
-    $('.current-project').html createObjectDropdown project[0].QueryResult.Results, false
+    userPromise = $.ajax
+      type: 'get'
+      url: '/users'
 
-    DataGenerator.currentUser = user
-    DataGenerator.currentProject = $('.current-project option:selected').text()
+    projectPromise = $.ajax
+      type: 'get'
+      url: "/project"
 
-    $('.current-project').on 'change', (e) ->
+    $.when(userPromise, projectPromise).then (user, project) ->
+
+      $('.current-user').html user[0].User.EmailAddress
+      $('.current-project').html createObjectDropdown project[0].QueryResult.Results, false
+
+      DataGenerator.currentUser = user
       DataGenerator.currentProject = $('.current-project option:selected').text()
+      DataGenerator.currentProjectOid = $('.current-project option:selected').val()
+
+      $('.current-project').on 'change', (e) ->
+        DataGenerator.currentProject = $('.current-project option:selected').text()
+        DataGenerator.currentProjectOid = $('.current-project option:selected').val()
+        loadProjectScopedDropdowns(DataGenerator.currentProject)
+
       loadProjectScopedDropdowns(DataGenerator.currentProject)
 
-    loadProjectScopedDropdowns(DataGenerator.currentProject)
-
-    loadRallyDropdown """#{wsBaseURI}/attributedefinition/-12513/AllowedValues""", '#defectPriority'
-    loadRallyDropdown """#{wsBaseURI}/attributedefinition/-12509/AllowedValues""", '#defectSeverity'
-    loadRallyDropdown """#{wsBaseURI}/attributedefinition/-12511/AllowedValues""", '#defectEnvironments'
-    loadRallyDropdown """#{wsBaseURI}/attributedefinition/-27506/AllowedValues""", '#storyState'
+      loadRallyDropdown """#{wsBaseURI}/attributedefinition/-12513/AllowedValues""", '#defectPriority'
+      loadRallyDropdown """#{wsBaseURI}/attributedefinition/-12509/AllowedValues""", '#defectSeverity'
+      loadRallyDropdown """#{wsBaseURI}/attributedefinition/-12511/AllowedValues""", '#defectEnvironments'
+      loadRallyDropdown """#{wsBaseURI}/attributedefinition/-27506/AllowedValues""", '#storyState'

@@ -5,9 +5,9 @@ form.form-horizontal(method='post', action='/task')
     .controls
       input#taskName(type="text", placeholder="Tag Name", data-field-name='Name', value="a_task")
   .control-group
-    label.control-label(for="defectSeverity") Parent
+    label.control-label(for="taskParent") Parent
     .controls
-      select#taskParent(data-field-name='Parent')
+      select#taskParent(data-field-name='WorkProduct')
   .control-group
     label.control-label(for="taskCount") Count
     .controls
