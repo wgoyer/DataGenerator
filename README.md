@@ -15,6 +15,8 @@ Building / Running
 
 Note: You must have a default project set in Rally or there will be errors and you will not create anything.  This will be fixed.
 
+Note: Run this command in your terminal so you don't track changes in credentials.js: `git update-index --assume-unchanged credentials.js`
+
 To Do
 =============
 
